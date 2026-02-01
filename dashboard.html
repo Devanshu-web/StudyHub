@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudyHub - Student Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student dashboard with progress tracking and study analytics">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+
+   
+    
+    
+    
+    
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span>StudyHub</span>
+                </a>
+                 <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="class-6.html">classes</a>
+                    <a href="about.html" class="active">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+
+                <div class="user-info">
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-class" id="userClass">Class 10</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="container">
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="profile-section">
+                    <div class="profile-avatar" id="profileAvatar">S</div>
+                    <h3 class="profile-name" id="profileName">Student Name</h3>
+                    <p class="profile-class" id="profileClass">Class 10 Student</p>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overallProgressBar"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Overall Progress</span>
+                        <span id="progressPercent">65%</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <div class="welcome-content">
+                        <h1 id="welcomeMessage">Welcome back, Student!</h1>
+                        <p>Track your learning progress and continue your study journey</p>
+                        <div class="live-time">
+                            <i class="fas fa-clock"></i>
+                            <span id="liveTime">00:00:00</span>
+                            <span id="liveDate">Monday, 1 Jan 2024</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon study">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="studyHours">0</h3>
+                            <p>Study Hours This Week</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon notes">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="notesCount">0</h3>
+                            <p>Notes Completed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon tests">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="testsCompleted">0</h3>
+                            <p>Tests Completed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon streak">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="streakDays">0</h3>
+                            <p>Day Streak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts & Activities -->
+                <div class="charts-section">
+                    <div class="chart-card">
+                        <h3><i class="fas fa-chart-bar"></i> Weekly Study Activity</h3>
+                        <div class="chart-container">
+                            <canvas id="studyChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <ul class="activity-list" id="activityList">
+                            <!-- Activities will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Subject Progress -->
+                <div class="subject-progress">
+                    <h3><i class="fas fa-tasks"></i> Subject Progress</h3>
+                    <div id="subjectProgressContainer">
+                        <!-- Subjects will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <div class="action-card" onclick="trackActivity('Study Session', 'Started a new study session')">
+                        <div class="action-icon notes">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4>Start Study</h4>
+                        <p>Begin a new study session</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="trackActivity('Quiz Attempt', 'Attempted a practice quiz')">
+                        <div class="action-icon quiz">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Take Quiz</h4>
+                        <p>Test your knowledge</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="trackActivity('Note Viewed', 'Viewed study notes')">
+                        <div class="action-icon video">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>View Notes</h4>
+                        <p>Access study materials</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="trackActivity('Download', 'Downloaded study material')">
+                        <div class="action-icon notes">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h4>Download</h4>
+                        <p>Get study resources</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+ 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// ======================= CONFIG =======================
+const BASE_URL = "https://studyhub-rq7d.onrender.com";
+
+// ======================= AUTH CHECK =======================
+function checkAuth() {
+    const user = JSON.parse(localStorage.getItem('studyhub_user'));
+    const token = localStorage.getItem('studyhub_token');
+    
+    if (!user || !token) {
+        window.location.href = 'login.html';
+        return false;
+    }
+    return { user, token };
+}
+
+// ======================= LIVE CLOCK =======================
+function updateLiveClock() {
+    const timeEl = document.getElementById('liveTime');
+    const dateEl = document.getElementById('liveDate');
+    
+    function update() {
+        const now = new Date();
+        
+        // Format time (HH:MM:SS)
+        const timeString = now.toLocaleTimeString('en-US', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        
+        // Format date
+        const dateString = now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        if(timeEl) timeEl.textContent = timeString;
+        if(dateEl) dateEl.textContent = dateString;
+    }
+    
+    update(); // Initial call
+    setInterval(update, 1000);
+}
+
+// ======================= LOAD DASHBOARD DATA =======================
+async function loadDashboardData() {
+    const auth = checkAuth();
+    if (!auth) return;
+    
+    const { user, token } = auth;
+    
+    // Set user info immediately
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('profileName').textContent = user.name;
+    document.getElementById('profileClass').textContent = `Class ${user.class} Student`;
+    document.getElementById('userClass').textContent = `Class ${user.class}`;
+    document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.name}!`;
+    
+    // Set avatar initial
+    const avatarEl = document.getElementById('profileAvatar');
+    if (avatarEl) {
+        const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+        avatarEl.textContent = initials.substring(0, 2);
+    }
+    
+    try {
+        const res = await fetch(`${BASE_URL}/api/user/dashboard`, {
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (res.status === 401) {
+            // Token expired
+            localStorage.removeItem('studyhub_token');
+            localStorage.removeItem('studyhub_user');
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const data = await res.json();
+        
+        if (!res.ok) {
+            throw new Error(data.message || 'Failed to load dashboard');
+        }
+        
+        // Update stats
+        updateStats(data);
+        
+        // Update progress
+        updateProgress(data);
+        
+        // Update recent activity
+        updateRecentActivity(data);
+        
+        // Update subject progress
+        updateSubjectProgress(data);
+        
+        // Initialize chart
+        if (data.studyData) {
+            initializeStudyChart(data.studyData);
+        }
+        
+    } catch (err) {
+        console.error('Dashboard error:', err);
+        showDashboardMessage('error', 'Failed to load dashboard data. Using demo data.');
+        loadDemoData();
+    }
+}
+
+// ======================= UPDATE FUNCTIONS =======================
+function updateStats(data) {
+    const stats = {
+        studyHours: data.studyHours || 0,
+        notesCount: data.notesCompleted || 0,
+        testsCompleted: data.testsCompleted || 0,
+        streakDays: data.streakDays || 0
+    };
+    
+    document.getElementById('studyHours').textContent = stats.studyHours;
+    document.getElementById('notesCount').textContent = stats.notesCount;
+    document.getElementById('testsCompleted').textContent = stats.testsCompleted;
+    document.getElementById('streakDays').textContent = stats.streakDays;
+}
+
+function updateProgress(data) {
+    const progressPercent = data.overallProgress || 0;
+    const progressBar = document.getElementById('overallProgressBar');
+    const progressPercentEl = document.getElementById('progressPercent');
+    
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+        progressBar.style.backgroundColor = getProgressColor(progressPercent);
+    }
+    
+    if (progressPercentEl) {
+        progressPercentEl.textContent = `${progressPercent}%`;
+    }
+}
+
+function updateRecentActivity(data) {
+    const activityList = document.getElementById('activityList');
+    if (!activityList) return;
+    
+    activityList.innerHTML = '';
+    
+    const activities = data.recentActivity || [
+        { title: 'Started Math chapter', time: '2 hours ago' },
+        { title: 'Completed Science quiz', time: '1 day ago' },
+        { title: 'Added new notes', time: '2 days ago' }
+    ];
+    
+    activities.forEach(activity => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div class="activity-item">
+                <i class="fas fa-circle"></i>
+                <span class="activity-title">${activity.title}</span>
+                <span class="activity-time">${activity.time}</span>
+            </div>
+        `;
+        activityList.appendChild(li);
+    });
+}
+
+function updateSubjectProgress(data) {
+    const container = document.getElementById('subjectProgressContainer');
+    if (!container) return;
+    
+    const subjects = data.subjectProgress || [
+        { name: 'Mathematics', progress: 75 },
+        { name: 'Science', progress: 60 },
+        { name: 'English', progress: 45 },
+        { name: 'Social Studies', progress: 30 }
+    ];
+    
+    container.innerHTML = '';
+    
+    subjects.forEach(subject => {
+        const div = document.createElement('div');
+        div.className = 'subject-card';
+        div.innerHTML = `
+            <div class="subject-header">
+                <h4>${subject.name}</h4>
+                <span>${subject.progress}%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${subject.progress}%; background-color: ${getProgressColor(subject.progress)}"></div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// ======================= CHART INITIALIZATION =======================
+function initializeStudyChart(studyData) {
+    const ctx = document.getElementById('studyChart');
+    if (!ctx) return;
+    
+    // Use demo data if no real data
+    const data = studyData || {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        hours: [2, 3, 1.5, 4, 2.5, 3.5, 1]
+    };
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Study Hours',
+                data: data.hours,
+                backgroundColor: '#4361ee',
+                borderRadius: 6,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0,0,0,0.05)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value + 'h';
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+}
+
+// ======================= HELPER FUNCTIONS =======================
+function getProgressColor(percent) {
+    if (percent >= 80) return '#10b981';
+    if (percent >= 60) return '#3b82f6';
+    if (percent >= 40) return '#f59e0b';
+    return '#ef4444';
+}
+
+function showDashboardMessage(type, text) {
+    const message = document.createElement('div');
+    message.className = `dashboard-message ${type}`;
+    message.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${text}</span>
+        <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+    `;
+    
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.insertBefore(message, mainContent.firstChild);
+        
+        setTimeout(() => {
+            if (message.parentElement) {
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 300);
+            }
+        }, 5000);
+    }
+}
+
+function loadDemoData() {
+    // Set demo stats
+    document.getElementById('studyHours').textContent = '12.5';
+    document.getElementById('notesCount').textContent = '24';
+    document.getElementById('testsCompleted').textContent = '8';
+    document.getElementById('streakDays').textContent = '7';
+    
+    // Set demo progress
+    const progressBar = document.getElementById('overallProgressBar');
+    const progressPercent = '65';
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+    document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+    
+    // Initialize demo chart
+    setTimeout(() => initializeStudyChart(), 500);
+}
+
+// ======================= ACTIVITY TRACKING =======================
+async function trackActivity(title, description) {
+    const auth = checkAuth();
+    if (!auth) return;
+    
+    const { token } = auth;
+    
+    try {
+        const res = await fetch(`${BASE_URL}/api/user/activity`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ 
+                title, 
+                description,
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        if (res.ok) {
+            console.log('Activity logged:', title);
+        }
+    } catch (err) {
+        console.error('Error logging activity:', err);
+    }
+    
+    // Show feedback to user
+    showDashboardMessage('success', `${title} activity recorded!`);
+}
+
+// ======================= LOGOUT FUNCTION =======================
+function logout() {
+    localStorage.removeItem('studyhub_token');
+    localStorage.removeItem('studyhub_user');
+    window.location.href = 'login.html';
+}
+
+// ======================= INITIALIZE =======================
+document.addEventListener('DOMContentLoaded', () => {
+    // Check authentication
+    checkAuth();
+    
+    // Start live clock
+    updateLiveClock();
+    
+    // Load dashboard data
+    loadDashboardData();
+    
+    // Add logout button functionality if needed
+    const logoutBtn = document.querySelector('.logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
+    
+    // Quick actions
+    document.querySelectorAll('.action-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.querySelector('h4').textContent;
+            const desc = this.querySelector('p').textContent;
+            trackActivity(title, desc);
+        });
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Content Partner | StudyHub</title>
+    <meta name="description" content="Share your notes and solutions with StudyHub community. Earn recognition and help fellow students.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #e0e7ff;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --accent-light: #fce4ec;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 20px 40px rgba(67, 97, 238, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 20px;
+            --border-radius-sm: 12px;
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-accent: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            --gradient-light: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
+            --gradient-success: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Simplified Header */
+        .partner-header {
+            background: var(--gradient-primary);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .partner-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .partner-header .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .partner-hero {
+            padding: 120px 0 80px;
+            background: var(--gradient-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%234361ee" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .partner-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .partner-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .partner-hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Submission Form */
+        .submission-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .submission-form {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .file-upload {
+            border: 2px dashed var(--gray-light);
+            border-radius: var(--border-radius-sm);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-preview {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-preview.active {
+            display: block;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-item i {
+            color: var(--primary);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 80px 0;
+            background: var(--gradient-light);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Guidelines Section */
+        .guidelines-section {
+            padding: 80px 0;
+        }
+
+        .guidelines-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .guideline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .guideline-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .guideline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .guideline-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Messages */
+        .message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 10000;
+            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .message.success {
+            background: var(--success);
+        }
+
+        .message.error {
+            background: var(--accent);
+        }
+
+        .message.info {
+            background: var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        .partner-footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .partner-footer .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .partner-footer p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-to-home {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2rem;
+            transition: var(--transition);
+        }
+
+        .back-to-home:hover {
+            gap: 12px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .partner-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .partner-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .partner-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .submission-form {
+                padding: 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .partner-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .submission-form {
+                padding: 1.5rem;
+            }
+            
+            .guideline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Simplified Header -->
+    <header class="partner-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                StudyHub Partner
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="partner-hero">
+        <div class="container">
+            <div class="partner-hero-content">
+                <h1>Share Your Knowledge, Help Others Learn</h1>
+                <p>Become a StudyHub Content Partner and contribute your notes, solutions, and study materials. Help thousands of students while earning recognition and rewards.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">5,000+</div>
+                        <div class="stat-label">Active Contributors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">Resources Shared</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Students Helped</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submission Form -->
+    <section class="submission-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Submit Your Content</h2>
+                <p>Share your study materials with the StudyHub community. Fill out the form below to submit your notes or solutions.</p>
+            </div>
+            
+            <form class="submission-form" id="partnerForm">
+                <!-- Personal Information -->
+                <div class="form-group">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Personal Information</h3>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="student@example.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+91 9876543210">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class">Your Class <span class="required">*</span></label>
+                        <select id="class" required>
+                            <option value="">Select your class</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Content Information -->
+                <div class="form-group" style="margin-top: 3rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Content Details</h3>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contentType">Type of Content <span class="required">*</span></label>
+                        <select id="contentType" required>
+                            <option value="">Select content type</option>
+                            <option value="notes">Chapter Notes</option>
+                            <option value="solutions">NCERT Solutions</option>
+                            <option value="summary">Chapter Summary</option>
+                            <option value="formulas">Important Formulas</option>
+                            <option value="questions">Practice Questions</option>
+                            <option value="other">Other Study Material</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <select id="subject" required>
+                            <option value="">Select subject</option>
+                            <option value="maths">Mathematics</option>
+                            <option value="science">Science</option>
+                            <option value="english">English</option>
+                            <option value="social">Social Science</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="sanskrit">Sanskrit</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="chapter">Chapter/Chapter Number</label>
+                        <input type="text" id="chapter" placeholder="e.g., Chapter 5: Acids, Bases and Salts">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="board">Educational Board</label>
+                        <select id="board">
+                            <option value="">Select board (if applicable)</option>
+                            <option value="cbse">CBSE</option>
+                            <option value="icse">ICSE</option>
+                            <option value="state">State Board</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- File Upload -->
+                <div class="form-group">
+                    <label>Upload Your Files <span class="required">*</span></label>
+                    <div class="file-upload" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h4>Click to upload or drag and drop</h4>
+                        <p>PDF, DOC, DOCX, JPG, PNG files (Max: 10MB each)</p>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    </div>
+                    <div class="file-preview" id="filePreview"></div>
+                </div>
+                
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="description">Content Description <span class="required">*</span></label>
+                    <textarea id="description" placeholder="Describe your content in detail. Include important topics covered, special features, and any other relevant information." rows="4" required></textarea>
+                </div>
+                
+                <!-- Terms and Submit -->
+                <div class="form-group">
+                    <div style="display: flex; align-items: start; gap: 10px; margin-bottom: 1.5rem;">
+                        <input type="checkbox" id="terms" required style="width: auto; margin-top: 5px;">
+                        <label for="terms" style="font-weight: normal; margin-bottom: 0;">
+                            I agree to the <a href="#" style="color: var(--primary);">Terms of Submission</a>. I confirm that this is my original work and I have the right to share it.
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Your Content
+                </button>
+                
+                <p style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.9rem;">
+                    We'll review your submission within 3-5 working days and notify you via email.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Become a Partner?</h2>
+                <p>Join our community of contributors and enjoy these benefits</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Earn Recognition</h3>
+                    <p>Get featured on our contributors page with your name and profile. Build your reputation as a knowledgeable student.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Help Fellow Students</h3>
+                    <p>Your content will help thousands of students across India understand difficult concepts and improve their grades.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Receive Rewards</h3>
+                    <p>Top contributors receive certificates, StudyHub premium features, and exclusive merchandise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guidelines Section -->
+    <section class="guidelines-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Submission Guidelines</h2>
+                <p>Follow these guidelines to ensure your content gets approved quickly</p>
+            </div>
+            
+            <div class="guidelines-list">
+                <div class="guideline-item">
+                    <div class="guideline-number">1</div>
+                    <div class="guideline-content">
+                        <h3>Original Content Only</h3>
+                        <p>Submit only your original work. Plagiarized content will be rejected immediately.</p>
+                    </div>
+                </div>
+                
+                <div class="guideline-item">
+                    <div class="guideline-number">2</div>
+                    <div class="guideline-content">
+                        <h3>Clear and Legible</h3>
+                        <p>Ensure your notes are neatly written, clear, and easy to read. Use good quality images or PDFs.</p>
+                    </div>
+                </div>
+                
+                <div class="guideline-item">
+                    <div class="guideline-number">3</div>
+                    <div class="guideline-content">
+                        <h3>Accurate Information</h3>
+                        <p>Double-check facts, formulas, and solutions for accuracy before submitting.</p>
+                    </div>
+                </div>
+                
+                <div class="guideline-item">
+                    <div class="guideline-number">4</div>
+                    <div class="guideline-content">
+                        <h3>Proper Formatting</h3>
+                        <p>Organize your content with clear headings, bullet points, and proper spacing.</p>
+                    </div>
+                </div>
+                
+                <div class="guideline-item">
+                    <div class="guideline-number">5</div>
+                    <div class="guideline-content">
+                        <h3>Complete Chapters</h3>
+                        <p>Submit complete chapter notes or solutions rather than partial content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="partner-footer">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                StudyHub
+            </a>
+            
+            <p>StudyHub Partner Program is dedicated to creating a collaborative learning environment where students help each other succeed.</p>
+            
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-arrow-left"></i>
+                Back to StudyHub Home
+            </a>
+            
+            <div class="copyright">
+                <p>&copy; 2024 StudyHub Partner Program. All rights reserved.</p>
+                <p>Contact: partners@studyhub.in | +91 98765 43210</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // File Upload Handling
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+
+        fileUploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--primary)';
+            fileUploadArea.style.background = 'var(--primary-light)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = '';
+            fileUploadArea.style.background = '';
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = '';
+            fileUploadArea.style.background = '';
+            
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                updateFilePreview();
+            }
+        });
+
+        fileInput.addEventListener('change', updateFilePreview);
+
+        function updateFilePreview() {
+            filePreview.innerHTML = '';
+            
+            if (fileInput.files.length > 0) {
+                filePreview.classList.add('active');
+                
+                for (let file of fileInput.files) {
+                    const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                    
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    
+                    let fileIcon = 'fa-file';
+                    if (file.type.includes('image')) fileIcon = 'fa-file-image';
+                    else if (file.type.includes('pdf')) fileIcon = 'fa-file-pdf';
+                    else if (file.type.includes('word') || file.type.includes('document')) fileIcon = 'fa-file-word';
+                    
+                    previewItem.innerHTML = `
+                        <i class="fas ${fileIcon}"></i>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">${file.name}</div>
+                            <div style="font-size: 0.9rem; color: var(--gray);">${fileSize} MB</div>
+                        </div>
+                        <button type="button" class="remove-file" style="background: none; border: none; color: var(--accent); cursor: pointer;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    filePreview.appendChild(previewItem);
+                    
+                    // Add remove functionality
+                    previewItem.querySelector('.remove-file').addEventListener('click', () => {
+                        // Create new FileList without this file
+                        const dt = new DataTransfer();
+                        for (let f of fileInput.files) {
+                            if (f !== file) {
+                                dt.items.add(f);
+                            }
+                        }
+                        fileInput.files = dt.files;
+                        updateFilePreview();
+                    });
+                }
+            } else {
+                filePreview.classList.remove('active');
+            }
+        }
+
+        // Form Submission
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const classValue = document.getElementById('class').value;
+            const contentType = document.getElementById('contentType').value;
+            const subject = document.getElementById('subject').value;
+            const description = document.getElementById('description').value.trim();
+            const files = fileInput.files;
+            
+            // Validation
+            if (!fullName) {
+                showMessage('Please enter your full name', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (!classValue) {
+                showMessage('Please select your class', 'error');
+                return;
+            }
+            
+            if (!contentType) {
+                showMessage('Please select content type', 'error');
+                return;
+            }
+            
+            if (!subject) {
+                showMessage('Please select subject', 'error');
+                return;
+            }
+            
+            if (files.length === 0) {
+                showMessage('Please upload at least one file', 'error');
+                return;
+            }
+            
+            // Check file sizes
+            for (let file of files) {
+                if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                    showMessage(`File "${file.name}" exceeds 10MB limit`, 'error');
+                    return;
+                }
+            }
+            
+            if (!description || description.length < 20) {
+                showMessage('Please provide a detailed description (minimum 20 characters)', 'error');
+                return;
+            }
+            
+            if (!document.getElementById('terms').checked) {
+                showMessage('Please agree to the terms of submission', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Success message
+                showMessage('Submission successful! We\'ll review your content within 3-5 working days.', 'success');
+                
+                // Save submission to localStorage
+                const submissionData = {
+                    fullName,
+                    email,
+                    class: classValue,
+                    contentType,
+                    subject,
+                    chapter: document.getElementById('chapter').value.trim(),
+                    board: document.getElementById('board').value,
+                    description,
+                    filesCount: files.length,
+                    timestamp: new Date().toISOString()
+                };
+                
+                const submissions = JSON.parse(localStorage.getItem('studyhub_submissions') || '[]');
+                submissions.push(submissionData);
+                localStorage.setItem('studyhub_submissions', JSON.stringify(submissions));
+                
+                // Reset form
+                this.reset();
+                filePreview.classList.remove('active');
+                filePreview.innerHTML = '';
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Log to console for demo
+                console.log('Partner submission:', submissionData);
+                console.log('Files submitted:', files.length);
+                
+                // Show success message with next steps
+                setTimeout(() => {
+                    showMessage('Check your email for confirmation. Thank you for contributing!', 'success');
+                }, 2000);
+            }, 2000);
+        });
+
+        // Email validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Show message function
+        function showMessage(text, type = 'info') {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.message');
+            existingMessages.forEach(msg => {
+                msg.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                setTimeout(() => msg.remove(), 400);
+            });
+            
+            // Create new message
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            
+            // Set icon based on type
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'error') icon = 'exclamation-circle';
+            
+            message.innerHTML = `
+                <i class="fas fa-${icon}"></i>
+                <span>${text}</span>
+            `;
+            
+            document.body.appendChild(message);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                message.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                setTimeout(() => message.remove(), 400);
+            }, 5000);
+        }
+
+        // Initialize form validation
+        document.querySelectorAll('#partnerForm input, #partnerForm select, #partnerForm textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = 'var(--accent)';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                this.style.borderColor = '';
+            });
+        });
+
+        // Auto-save form data
+        const partnerForm = document.getElementById('partnerForm');
+        const formInputs = partnerForm.querySelectorAll('input, select, textarea');
+        
+        // Save form data on input
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const formData = {};
+                formInputs.forEach(input => {
+                    if (input.name || input.id) {
+                        const key = input.name || input.id;
+                        if (input.type === 'checkbox') {
+                            formData[key] = input.checked;
+                        } else {
+                            formData[key] = input.value;
+                        }
+                    }
+                });
+                localStorage.setItem('partnerFormDraft', JSON.stringify(formData));
+            });
+        });
+
+        // Load saved form data
+        const savedData = localStorage.getItem('partnerFormDraft');
+        if (savedData) {
+            const formData = JSON.parse(savedData);
+            formInputs.forEach(input => {
+                const key = input.name || input.id;
+                if (formData[key] !== undefined) {
+                    if (input.type === 'checkbox') {
+                        input.checked = formData[key];
+                    } else {
+                        input.value = formData[key];
+                    }
+                }
+            });
+        }
+
+        // Clear saved data on successful submission
+        partnerForm.addEventListener('submit', function() {
+            setTimeout(() => {
+                localStorage.removeItem('partnerFormDraft');
+            }, 1000);
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.benefit-card, .guideline-item, .submission-form').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Initialize page with animations
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.benefit-card, .guideline-item').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 300);
+        });
+const mongoose = require('mongoose');
+
+const partnerSchema = new mongoose.Schema({
+    fullName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true
+    },
+    phone: {
+        type: String,
+        trim: true
+    },
+    class: {
+        type: String,
+        required: true,
+        enum: ['6', '7', '8', '9', '10', 'other']
+    },
+    contentType: {
+        type: String,
+        required: true,
+        enum: ['notes', 'solutions', 'summary', 'formulas', 'questions', 'other']
+    },
+    subject: {
+        type: String,
+        required: true,
+        enum: ['maths', 'science', 'english', 'social', 'hindi', 'sanskrit', 'other']
+    },
+    chapter: {
+        type: String,
+        trim: true
+    },
+    board: {
+        type: String,
+        enum: ['cbse', 'icse', 'state', 'other', '']
+    },
+    description: {
+        type: String,
+        required: true,
+        minlength: 20
+    },
+    files: [{
+        filename: String,
+        originalName: String,
+        size: Number,
+        mimetype: String,
+        path: String
+    }],
+    status: {
+        type: String,
+        enum: ['pending', 'under_review', 'approved', 'rejected'],
+        default: 'pending'
+    },
+    reviewNotes: {
+        type: String,
+        default: ''
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+partnerSchema.pre('save', function(next) {
+    this.updatedAt = Date.now();
+    next();
+});
+
+const Partner = mongoose.model('Partner', partnerSchema);
+module.exports = Partner;
+    </script>
+</body>
+</html>
