@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudyHub - Free Education Platform for Students</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free NCERT solutions, study notes, and interactive learning for students from Class 9-12. Join India's fastest growing education platform.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+
+   
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <meta name="google-site-verification" content="BcKC4tMTYBvt460pmuTH_DWywPq8jNk3wfnEnNgiPio" />
+    
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="floating float-1">
+        <div style="width: 50px; height: 50px; background: var(--gradient-accent); border-radius: 15px; opacity: 0.1;"></div>
+    </div>
+    <div class="floating float-2">
+        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 12px; opacity: 0.1;"></div>
+    </div>
+    <div class="floating float-3">
+        <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 18px; opacity: 0.1;"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span>StudyHub</span>
+                </a>
+
+                <nav class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                     <a href="class-6.html">classes </a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                   
+
+                </nav>
+
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Study Smarter,With <span> StudyHub</span></h1>
+                <p>Free NCERT solutions, comprehensive study notes, and interactive learning resources for students from Class 6-10.  </p>
+                
+                <div class="hero-buttons">
+                    <a href="dashboard.html" class="btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Learning 
+                    </a>
+                    <a href="about.html" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        learn more 
+                    </a>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Everything You Need to Succeed</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">StudyHub provides comprehensive learning resources designed to help you excel in your academics.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Comprehensive Notes</h3>
+                    <p>Handwritten, chapter-wise notes for all subjects with clear explanations and diagrams.</p>
+                    <a href="notes.html" class="feature-link">
+                        Explore Notes
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>NCERT Solutions</h3>
+                    <p>Step-by-step solutions to all NCERT textbook questions with detailed explanations.</p>
+                    <a href="solutions.html" class="feature-link">
+                        View Solutions
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your learning journey with detailed analytics and personalized reports.</p>
+                    <a href="dashboard.html" class="feature-link">
+                        Track Progress
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">How StudyHub Works</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Get started with StudyHub in three simple steps</p>
+            
+            <div class="steps">
+                <div class="step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">1</div>
+                    <h3>Create Account</h3>
+                    <p>Sign up for free in less than 2 minutes</p>
+                </div>
+                
+                <div class="step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">2</div>
+                    <h3>Select Your Class</h3>
+                    <p>Choose your class and subjects</p>
+                </div>
+                
+                <div class="step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">3</div>
+                    <h3>Start Learning</h3>
+                    <p>Access notes, solutions, and practice tests</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">What Students Say</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Join thousands of successful students who have improved their grades with StudyHub</p>
+            
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"StudyHub helped me go from 65% to 92% in just 6 months. The notes are so well-explained and the solutions made complex problems easy to understand!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AA</div>
+                        <div class="author-info">
+                            <h4>Ayush Aryan</h4>
+                            <p>Class 7 Student, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2>Ready to Transform Your Learning?</h2>
+                <p>Join StudyHub today and get access to all resources completely free. No hidden charges, no subscriptions.</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Create Free Account
+                    </a>
+                    <a href="about.html" class="btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column" data-aos="fade-up">
+                    <h3>About StudyHub</h3>
+                    <p>StudyHub is dedicated to providing free, high-quality educational resources to students across
+                        India. Join our mission to democratize education.</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="./assets/images/facebook.svg" alt="facebook"></a>
+                        <a href="#"><img src="./assets/images/twitter.svg" alt="twitter"></a>
+                         <a href="https://www.instagram.com/devanshu0745/" target="_blank"><img src="./assets/images/instagram.svg" alt="instagram"></a>
+                       <a href="#"><img src="./assets/images/pinterest.svg" alt="pinterest"></a>
+                      
+                    </div>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="notes.html"><i class="fas fa-book"></i> Notes</a></li>
+                        <li><a href="solutions.html"><i class="fas fa-lightbulb"></i> Solutions</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-download"></i> Download Center</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Study Blog</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+                        <li><a href="#"><i class="fas fa-bookmark"></i> Important Questions</a></li>
+                    </ul>
+                </div>
+                
+                
+            
+            <div class="copyright">
+                <p>&copy; 2026 StudyHub. All rights reserved. | Made with <i class="fas fa-heart" style="color: #f72585;"></i> for students in India</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">
+                    <a href="#" style="color: rgba(255, 255, 255, 0.5); margin: 0 0.5rem;">Privacy Policy</a> | 
+                    <a href="#" style="color: rgba(255, 255, 255, 0.5); margin: 0 0.5rem;">Terms of Service</a> | 
+                    <a href="#" style="color: rgba(255, 255, 255, 0.5); margin: 0 0.5rem;">Contact Us</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="assets/js/index.js"></script>
+<script src="assets/js/main.js"></script>
+
+    
+    
+</body>
+</html>

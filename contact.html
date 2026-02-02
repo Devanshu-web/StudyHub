@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | StudyHub</title>
+    <meta name="description" content="Get in touch with StudyHub team. Contact us for support, questions, or feedback about our learning platform.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #e0e7ff;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --accent-light: #fce4ec;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 20px 40px rgba(67, 97, 238, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 20px;
+            --border-radius-sm: 12px;
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-accent: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            --gradient-light: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            width: 80%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-signup {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Contact Hero */
+        .contact-hero {
+            padding: 180px 0 100px;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .contact-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .contact-hero-illustration {
+            margin-top: 3rem;
+            position: relative;
+            height: 200px;
+        }
+
+        .contact-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-size: 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Contact Content */
+        .contact-content {
+            padding: 100px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* Contact Form */
+        .contact-form-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .contact-form-section p {
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 576px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .contact-cards {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .contact-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: var(--secondary);
+            gap: 12px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+            background: var(--gradient-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .faq-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .faq-item p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Location Section */
+        .location-section {
+            padding: 100px 0;
+        }
+
+        .location-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .location-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .location-content p {
+            color: var(--gray);
+            margin-bottom: 3rem;
+        }
+
+        .map-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 3rem;
+        }
+
+        .map-placeholder {
+            height: 300px;
+            background: var(--primary-light);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .office-hours {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .office-hours h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Messages */
+        .message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 10000;
+            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .message.success {
+            background: var(--success);
+        }
+
+        .message.error {
+            background: var(--accent);
+        }
+
+        .message.info {
+            background: var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .contact-hero {
+                padding: 150px 0 80px;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-links a {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    StudyHub
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="nav-links">
+                    
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="class-6.html">classes</a>
+                    <a href="about.html" class="active">About</a>
+                    <a href="contact.html">Contact</a>
+               
+
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Get Started</a>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+                <h1>Get in Touch</h1>
+                <p>Have questions, feedback, or need support? We're here to help you succeed in your learning journey.</p>
+                
+                <div class="contact-hero-illustration">
+                    <div class="contact-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Send us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" placeholder="student@example.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-section">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-cards">
+                        <!-- Email Card -->
+                        <div class="contact-card">
+                            <div class="contact-card-header">
+                                <div class="contact-card-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h3>Email Support</h3>
+                            </div>
+                            <p>Our team typically responds within 24 hours</p>
+                            <p><strong>Primary:</strong> support@studyhub.in</p>
+                            <p><strong>Academic:</strong> academics@studyhub.in</p>
+                            <a href="mailto:support@studyhub.in">
+                                Send an Email
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Phone Card -->
+                        <div class="contact-card">
+                            <div class="contact-card-header">
+                                <div class="contact-card-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <h3>Call Us</h3>
+                            </div>
+                            <p>Available Monday to Friday, 9 AM to 6 PM IST</p>
+                            <p><strong>Student Support:</strong> +91 98765 43210</p>
+                            <p><strong>General Inquiries:</strong> +91 98765 43211</p>
+                            <a href="tel:+919876543210">
+                                Call Now
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Address Card -->
+                        <div class="contact-card">
+                            <div class="contact-card-header">
+                                <div class="contact-card-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h3>Visit Our Office</h3>
+                            </div>
+                            <p><strong>StudyHub Headquarters</strong></p>
+                            <p>123 Education Street</p>
+                            <p>Learning City, LC 12345</p>
+                            <p>India</p>
+                            <a href="#location">
+                                View on Map
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find quick answers to common questions about StudyHub</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How do I reset my password?</h3>
+                    <p>Click on "Forgot Password" on the login page. We'll send a password reset link to your registered email address.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Is StudyHub really free?</h3>
+                    <p>Yes! All basic features are completely free. We believe education should be accessible to every student.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Which classes are supported?</h3>
+                    <p>We currently support Classes 6 to 10 with NCERT syllabus for Mathematics, Science, and English.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How do I report a bug or issue?</h3>
+                    <p>Use the contact form above or email bugs@studyhub.in. Please include screenshots if possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="container">
+            <div class="location-content">
+                <h2>Find Us Here</h2>
+                <p>Visit our office for direct assistance or meetings</p>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive map would be displayed here</p>
+                    </div>
+                </div>
+                
+                <div class="office-hours">
+                    <h3>Office Hours</h3>
+                    <ul class="hours-list">
+                        <li>
+                            <span>Monday - Friday</span>
+                            <span>9:00 AM - 6:00 PM</span>
+                        </li>
+                        <li>
+                            <span>Saturday</span>
+                            <span>10:00 AM - 4:00 PM</span>
+                        </li>
+                        <li>
+                            <span>Sunday</span>
+                            <span>Closed</span>
+                        </li>
+                    </ul>
+                    <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                        <em>All times in IST (UTC+5:30)</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+   <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column" data-aos="fade-up">
+                    <h3>About StudyHub</h3>
+                    <p>StudyHub is dedicated to providing free, high-quality educational resources to students across
+                        India. Join our mission to democratize education.</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="./assets/images/facebook.svg" alt="facebook"></a>
+                        <a href="#"><img src="./assets/images/twitter.svg" alt="twitter"></a>
+                        <a href="https://www.instagram.com/devanshu0745/" target="_blank"><img src="./assets/images/instagram.svg" alt="instagram"></a>
+                        <a href="#"><img src="./assets/images/pinterest.svg" alt="pinterest"></a>
+                        
+                        </div>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-links">
+                                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                <li><a href="notes.html"><i class="fas fa-book"></i> Notes</a></li>
+                                <li><a href="solutions.html"><i class="fas fa-check-circle"></i> Solutions</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h3>Support</h3>
+                            <ul class="footer-links">
+                                <li><a href="contact.html"><i class="fas fa-headset"></i> Contact Us</a></li>
+                                <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                                <li><a href="#"><i class="fas fa-comments"></i> Community</a></li>
+                                <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Report Issue</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        
+                        <div class="copyright">
+                            <p>&copy; 2024 StudyHub. All rights reserved.</p>
+                            <p>Built to support student learning everywhere.</p>
+                        </div>
+                        </div>
+                        </footer>
+                        
+                        <script>
+                            // Mobile Menu Toggle
+                            document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+                                const navLinks = document.querySelector('.nav-links');
+                                const authButtons = document.querySelector('.auth-buttons');
+
+                                // Toggle visibility
+                                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                                authButtons.style.display = authButtons.style.display === 'flex' ? 'none' : 'flex';
+
+                                // Change icon
+                                const icon = this.querySelector('i');
+                                icon.classList.toggle('fa-bars');
+                                icon.classList.toggle('fa-times');
+                            });
+
+                            // Header scroll effect
+                            window.addEventListener('scroll', function () {
+                                const header = document.querySelector('header');
+                                if (window.scrollY > 50) {
+                                    header.classList.add('scrolled');
+                                } else {
+                                    header.classList.remove('scrolled');
+                                }
+                            });
+
+                            // Contact Form Submission
+                            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                                e.preventDefault();
+
+                                const firstName = document.getElementById('firstName').value.trim();
+                                const lastName = document.getElementById('lastName').value.trim();
+                                const email = document.getElementById('email').value.trim();
+                                const subject = document.getElementById('subject').value;
+                                const message = document.getElementById('message').value.trim();
+
+                                // Basic validation
+                                if (!firstName || !lastName) {
+                                    showMessage('Please enter your full name', 'error');
+                                    return;
+                                }
+
+                                if (!validateEmail(email)) {
+                                    showMessage('Please enter a valid email address', 'error');
+                                    return;
+                                }
+
+                                if (!subject) {
+                                    showMessage('Please select a subject', 'error');
+                                    return;
+                                }
+
+                                if (!message || message.length < 10) {
+                                    showMessage('Please enter a message (minimum 10 characters)', 'error');
+                                    return;
+                                }
+
+                                // Show loading state
+                                const submitBtn = this.querySelector('button[type="submit"]');
+                                const originalText = submitBtn.innerHTML;
+                                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                                submitBtn.disabled = true;
+
+                                // Simulate form submission
+                                setTimeout(() => {
+                                    // Success message
+                                    showMessage('Message sent successfully! We\'ll get back to you soon.', 'success');
+
+                                    // Reset form
+                                    this.reset();
+
+                                    // Reset button
+                                    submitBtn.innerHTML = originalText;
+                                    submitBtn.disabled = false;
+
+                                    // Save to localStorage for demo
+                                    const contactData = {
+                                        firstName,
+                                        lastName,
+                                        email,
+                                        subject,
+                                        message,
+                                        timestamp: new Date().toISOString()
+                                    };
+
+                                    const contacts = JSON.parse(localStorage.getItem('studyhub_contacts') || '[]');
+                                    contacts.push(contactData);
+                                    localStorage.setItem('studyhub_contacts', JSON.stringify(contacts));
+
+                                    // Log to console for demo
+                                    console.log('Contact form submitted:', contactData);
+                                }, 1500);
+                            });
+
+                            // Email validation
+                            function validateEmail(email) {
+                                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                return re.test(email);
+                            }
+
+                            // Show message function
+                            function showMessage(text, type = 'info') {
+                                // Remove existing messages
+                                const existingMessages = document.querySelectorAll('.message');
+                                existingMessages.forEach(msg => {
+                                    msg.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                                    setTimeout(() => msg.remove(), 400);
+                                });
+
+                                // Create new message
+                                const message = document.createElement('div');
+                                message.className = `message ${type}`;
+
+                                // Set icon based on type
+                                let icon = 'info-circle';
+                                if (type === 'success') icon = 'check-circle';
+                                if (type === 'error') icon = 'exclamation-circle';
+
+                                message.innerHTML = `
+                                        <i class="fas fa-${icon}"></i>
+                                        <span>${text}</span>
+                                    `;
+
+                                document.body.appendChild(message);
+
+                                // Auto-remove after 5 seconds
+                                setTimeout(() => {
+                                    message.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                                    setTimeout(() => message.remove(), 400);
+                                }, 5000);
+                            }
+
+                            // Initialize form validation on input
+                            document.querySelectorAll('#contactForm input, #contactForm select, #contactForm textarea').forEach(input => {
+                                input.addEventListener('blur', function () {
+                                    if (this.hasAttribute('required') && !this.value.trim()) {
+                                        this.style.borderColor = 'var(--accent)';
+                                    } else {
+                                        this.style.borderColor = '';
+                                    }
+                                });
+
+                                input.addEventListener('input', function () {
+                                    this.style.borderColor = '';
+                                });
+                            });
+
+                            // FAQ accordion functionality (optional enhancement)
+                            document.querySelectorAll('.faq-item h3').forEach(question => {
+                                question.addEventListener('click', function () {
+                                    const answer = this.nextElementSibling;
+                                    const isOpen = answer.style.display === 'block';
+
+                                    // Close all answers
+                                    document.querySelectorAll('.faq-item p').forEach(p => {
+                                        p.style.display = 'none';
+                                    });
+
+                                    // Toggle current answer
+                                    answer.style.display = isOpen ? 'none' : 'block';
+
+                                    // Add visual feedback
+                                    this.parentElement.style.transform = isOpen ? '' : 'translateY(-5px)';
+                                    this.parentElement.style.boxShadow = isOpen ? 'var(--card-shadow)' : 'var(--card-shadow-hover)';
+                                });
+                            });
+
+                            // Initialize all FAQ answers as hidden
+                            document.querySelectorAll('.faq-item p').forEach(p => {
+                                p.style.display = 'none';
+                            });
+
+                            // Add animation on scroll
+                            const observerOptions = {
+                                threshold: 0.1,
+                                rootMargin: '0px 0px -50px 0px'
+                            };
+
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.style.opacity = '1';
+                                        entry.target.style.transform = 'translateY(0)';
+                                    }
+                                });
+                            }, observerOptions);
+
+                            // Observe elements for animation
+                            document.querySelectorAll('.contact-card, .faq-item, .contact-form-section, .contact-info-section').forEach(el => {
+                                el.style.opacity = '0';
+                                el.style.transform = 'translateY(20px)';
+                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                observer.observe(el);
+                            });
+
+                            // Form data persistence (optional)
+                            const contactForm = document.getElementById('contactForm');
+                            const formInputs = contactForm.querySelectorAll('input, select, textarea');
+
+                            // Save form data on input
+                            formInputs.forEach(input => {
+                                input.addEventListener('input', function () {
+                                    const formData = {};
+                                    formInputs.forEach(input => {
+                                        if (input.name || input.id) {
+                                            const key = input.name || input.id;
+                                            formData[key] = input.value;
+                                        }
+                                    });
+                                    localStorage.setItem('contactFormDraft', JSON.stringify(formData));
+                                });
+                            });
+
+                            // Load saved form data
+                            const savedData = localStorage.getItem('contactFormDraft');
+                            if (savedData) {
+                                const formData = JSON.parse(savedData);
+                                formInputs.forEach(input => {
+                                    const key = input.name || input.id;
+                                    if (formData[key]) {
+                                        input.value = formData[key];
+                                    }
+                                });
+                            }
+
+                            // Clear saved data on successful submission
+                            contactForm.addEventListener('submit', function () {
+                                setTimeout(() => {
+                                    localStorage.removeItem('contactFormDraft');
+                                }, 1000);
+                            });
+
+                            // Add keyboard shortcut for form submission
+                            document.addEventListener('keydown', function (e) {
+                                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                                    const focused = document.activeElement;
+                                    if (contactForm.contains(focused)) {
+                                        contactForm.requestSubmit();
+                                    }
+                                }
+                            });
+
+                            // Add print-friendly page feature
+                            const printButton = document.createElement('button');
+                            printButton.innerHTML = '<i class="fas fa-print"></i> Print Contact Info';
+                            printButton.style.position = 'fixed';
+                            printButton.style.bottom = '20px';
+                            printButton.style.right = '20px';
+                            printButton.style.zIndex = '100';
+                            printButton.style.background = 'var(--gradient-primary)';
+                            printButton.style.color = 'white';
+                            printButton.style.border = 'none';
+                            printButton.style.padding = '0.8rem 1.5rem';
+                            printButton.style.borderRadius = '50px';
+                            printButton.style.cursor = 'pointer';
+                            printButton.style.boxShadow = '0 5px 20px rgba(67, 97, 238, 0.3)';
+                            printButton.style.display = 'flex';
+                            printButton.style.alignItems = 'center';
+                            printButton.style.gap = '8px';
+                            printButton.style.fontWeight = '600';
+                            printButton.style.transition = 'var(--transition)';
+
+                            printButton.addEventListener('mouseenter', () => {
+                                printButton.style.transform = 'translateY(-3px)';
+                                printButton.style.boxShadow = '0 10px 30px rgba(67, 97, 238, 0.4)';
+                            });
+
+                            printButton.addEventListener('mouseleave', () => {
+                                printButton.style.transform = 'translateY(0)';
+                                printButton.style.boxShadow = '0 5px 20px rgba(67, 97, 238, 0.3)';
+                            });
+
+                            printButton.addEventListener('click', () => {
+                                const printContent = document.querySelector('.contact-content').innerHTML;
+                                const printWindow = window.open('', '_blank');
+                                printWindow.document.write(`
+                                        <html>
+                                            <head>
+                                                <title>StudyHub Contact Information</title>
+                                                <style>
+                                                    body { font-family: Arial, sans-serif; padding: 20px; }
+                                                    h2 { color: #4361ee; }
+                                                    .contact-card { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+                                                    @media print { button { display: none; } }
+                                                </style>
+                                            </head>
+                                            <body>
+                                                <h1>StudyHub Contact Information</h1>
+                                                <p>Printed on ${new Date().toLocaleDateString()}</p>
+                                                ${printContent}
+                                                <button onclick="window.print()">Print This Page</button>
+                                            </body>
+                                        </html>
+                                    `);
+                                printWindow.document.close();
+                            });
+
+                            document.body.appendChild(printButton);
+
+                            // Add smooth scrolling for anchor links
+                            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                                anchor.addEventListener('click', function (e) {
+                                    const href = this.getAttribute('href');
+                                    if (href !== '#') {
+                                        e.preventDefault();
+                                        const targetElement = document.querySelector(href);
+                                        if (targetElement) {
+                                            window.scrollTo({
+                                                top: targetElement.offsetTop - 80,
+                                                behavior: 'smooth'
+                                            });
+                                        }
+                                    }
+                                });
+                            });
+
+                            // Initialize the page with animated elements
+                            window.addEventListener('load', () => {
+                                // Trigger initial animations
+                                setTimeout(() => {
+                                    document.querySelectorAll('.contact-card, .faq-item').forEach((el, index) => {
+                                        setTimeout(() => {
+                                            el.style.opacity = '1';
+                                            el.style.transform = 'translateY(0)';
+                                        }, index * 100);
+                                    });
+                                }, 300);
+                            });
+                            const mongoose = require('mongoose');
+
+                            const contactSchema = new mongoose.Schema({
+                                firstName: {
+                                    type: String,
+                                    required: true,
+                                    trim: true
+                                },
+                                lastName: {
+                                    type: String,
+                                    required: true,
+                                    trim: true
+                                },
+                                email: {
+                                    type: String,
+                                    required: true,
+                                    trim: true,
+                                    lowercase: true
+                                },
+                                subject: {
+                                    type: String,
+                                    required: true,
+                                    enum: ['general', 'support', 'feedback', 'partnership', 'other']
+                                },
+                                message: {
+                                    type: String,
+                                    required: true,
+                                    minlength: 10
+                                },
+                                status: {
+                                    type: String,
+                                    enum: ['new', 'read', 'replied', 'resolved'],
+                                    default: 'new'
+                                },
+                                createdAt: {
+                                    type: Date,
+                                    default: Date.now
+                                },
+                                updatedAt: {
+                                    type: Date,
+                                    default: Date.now
+                                }
+                            });
+
+                            // Update the updatedAt field before saving
+                            contactSchema.pre('save', function (next) {
+                                this.updatedAt = Date.now();
+                                next();
+                            });
+
+                            const Contact = mongoose.model('Contact', contactSchema);
+                            module.exports = Contact;
+                        </script>
+                        </body>
+                        
+                        </html>
