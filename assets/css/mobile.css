@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @media (max-width: 1024px) {
     .auth-container {
         flex-direction: column;
@@ -124,4 +125,132 @@
     .auth-right {
         flex: 1;
     }
+=======
+@media (max-width: 1024px) {
+    .auth-container {
+        flex-direction: column;
+    }
+    
+    .auth-left,
+    .auth-right {
+        flex: none;
+        width: 30%;
+    }
+    
+    .auth-right {
+        padding: 2rem;
+        order: -1;
+    }
+    
+    .hero-content h3 {
+        font-size: 2rem;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:100px) {
+    .auth-left {
+        padding: 1.5rem;
+    }
+    
+    .auth-right {
+        padding: 1.5rem;
+    }
+    
+    .logo {
+        margin-bottom: 2rem;
+    }
+    
+    .auth-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-content h3 {
+        font-size: 1.75rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .social-login {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-left {
+        padding: 1rem;
+    }
+    
+    .auth-right {
+        padding: 1rem;
+    }
+    
+    .auth-content {
+        padding: 0;
+    }
+    
+    .auth-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .feature {
+        padding: 1rem;
+    }
+    
+    .notification {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+    }
+}
+
+/* Tablet Portrait */
+@media (min-width: 481px) and (max-width: 768px) {
+    .auth-left {
+        padding: 2rem;
+    }
+    
+    .auth-right {
+        padding: 2rem;
+    }
+    
+    .features {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .auth-container {
+        flex-direction: row;
+    }
+    
+    .auth-left {
+        flex: 1;
+    }
+    
+    .auth-right {
+        flex: 1;
+    }
+>>>>>>> 229f3a1ff00d238ed64a21dc9649590ac7cc49f9
 }
