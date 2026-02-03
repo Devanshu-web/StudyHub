@@ -907,6 +907,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+// After saving token in login.html
+localStorage.setItem('studyhub_token', data.token);
+localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+
+// Also save avatar initials
+const user = data.user || data.data?.user;
+if (user && user.name) {
+    const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+    localStorage.setItem('studyhub_avatar', initials.substring(0, 2));
+}
+
+// Redirect to dashboard
+window.location.href = 'dashboard.html';
 </script>
 </body>
 </html>

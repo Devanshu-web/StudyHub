@@ -528,7 +528,7 @@
             </div>
         </footer>
     
- <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
     
@@ -729,18 +729,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if(res.ok) {
-                    alert('✅ Account created successfully! Redirecting to login...');
-                    
-                    // Save newsletter preference
-                    const newsletter = document.getElementById('newsletter').checked;
-                    if(newsletter) {
-                        localStorage.setItem('studyhub_newsletter', 'true');
+                    // ✅ SAVE USER DATA AND TOKEN (IMPORTANT)
+                    if (data.token && data.user) {
+                        localStorage.setItem('studyhub_token', data.token);
+                        localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+                        
+                        alert('✅ Account created successfully! You are now logged in. Redirecting to dashboard...');
+                        
+                        // Save newsletter preference
+                        const newsletter = document.getElementById('newsletter').checked;
+                        if(newsletter) {
+                            localStorage.setItem('studyhub_newsletter', 'true');
+                        }
+                        
+                        // ✅ REDIRECT TO DASHBOARD (NOT LOGIN)
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    } else {
+                        // If backend doesn't return token, redirect to login
+                        alert('✅ Account created! Please login with your credentials.');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 1500);
                     }
-                    
-                    // Redirect to login page
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 1500);
                 } else {
                     // Handle specific error messages
                     let errorMsg = data.message || data.error || 'Signup failed';
