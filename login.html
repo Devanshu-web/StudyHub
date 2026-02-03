@@ -1,546 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | StudyHub</title>
-    <meta name="description"
-        content="Log in to your StudyHub account to access study materials, notes, and progress tracking.">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE STYLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary-color: #4361ee;
-            --primary-dark: #3a56d4;
-            --primary-light: #eef2ff;
-            --secondary-color: #7209b7;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-light: #94a3b8;
-            --bg-white: #ffffff;
-            --bg-light: #f8fafc;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --border-radius: 10px;
-            --transition: all 0.3s ease;
+            --primary-color: #4361ee; --primary-dark: #3a56d4; --primary-light: #eef2ff;
+            --secondary-color: #7209b7; --success-color: #10b981; --error-color: #ef4444;
+            --text-primary: #1e293b; --text-secondary: #64748b; --bg-white: #fff;
+            --border-color: #e2e8f0; --border-radius: 10px; --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
         }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            color: var(--text-primary);
-            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f4ff 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ===== HEADER ===== */
-        .auth-header {
-            background: var(--bg-white);
-            padding: 1.5rem 0;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .auth-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .auth-logo a {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-
-        .auth-logo i {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        .auth-logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ===== MAIN CONTENT ===== */
-        .auth-main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 0;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 1100px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        @media (max-width: 768px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* ===== LOGIN BOX ===== */
-        .login-box {
-            background: var(--bg-white);
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .login-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .login-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* ===== FORM STYLES ===== */
-        .login-form {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .input-with-icon {
-            position: relative;
-        }
-
-        .input-with-icon i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-        }
-
-        .input-with-icon input {
-            width: 100%;
-            padding: 0.875rem 1rem 0.875rem 3rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .input-with-icon input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        }
-
-        /* Password toggle */
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            padding: 0.25rem;
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        /* Form options */
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .remember-me input[type="checkbox"] {
-            width: 1.1rem;
-            height: 1.1rem;
-            cursor: pointer;
-        }
-
-        .forgot-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.875rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 1rem;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            text-decoration: none;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-color);
-            border-color: var(--border-color);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary-color);
-            background: var(--primary-light);
-        }
-
-        .btn-block {
-            width: 100%;
-        }
-
-        .btn-large {
-            padding: 1rem 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        /* Divider */
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
-        }
-
-        .divider span {
-            padding: 0 1rem;
-        }
-
-        /* Footer links */
-        .login-footer {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .login-footer p {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .login-footer a {
-            color: var(--primary-color);
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Security note */
-        .security-note {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .security-note i {
-            color: var(--success-color);
-        }
-
-        /* Inline validation */
-        .error-text {
-            color: var(--error-color);
-            font-size: 0.85rem;
-            margin-top: 0.35rem;
-            display: block;
-        }
-
-        input.valid {
-            border-color: var(--success-color);
-        }
-
-        input.invalid {
-            border-color: var(--error-color);
-        }
-
-        /* ===== FEATURES SIDE ===== */
-        .features-side {
-            padding: 1rem;
-        }
-
-        .features-side h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .features-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-        }
-
-        .features-list i {
-            color: var(--success-color);
-            font-size: 1.1rem;
-            min-width: 24px;
-        }
-
-        /* Demo account */
-        .demo-account {
-            background: linear-gradient(135deg, var(--primary-light), #e6eeff);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin-top: 2rem;
-        }
-
-        .demo-account h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .demo-account p {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .demo-account strong {
-            color: var(--text-primary);
-        }
-
-        .demo-btn {
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        /* ===== MESSAGE STYLES ===== */
-        .message {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-            max-width: 400px;
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-
-        .message.success {
-            background: var(--success-color);
-        }
-
-        .message.error {
-            background: var(--error-color);
-        }
-
-        .message.info {
-            background: var(--primary-color);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-
-        /* ===== FOOTER ===== */
-        .auth-page-footer {
-            background: var(--bg-white);
-            padding: 1.5rem 0;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 576px) {
-            .login-box {
-                padding: 1.5rem;
-            }
-
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .auth-container {
-                padding: 0 15px;
-            }
-
-            .footer-links {
-                gap: 1rem;
-            }
-        }
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--primary-light), #f0f4ff);
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .auth-header { background: var(--bg-white); padding: 1.5rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .auth-logo a { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+        .auth-logo i { font-size: 2rem; color: var(--primary-color); }
+        .auth-logo h1 { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 0; }
+        .auth-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1100px; }
+        @media(max-width:768px) { .auth-container { grid-template-columns: 1fr; } }
+        
+        .login-box { background: var(--bg-white); padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-lg); }
+        .login-header { text-align: center; margin-bottom: 2rem; }
+        .login-header h1 { font-size: 2rem; margin-bottom: .5rem; }
+        
+        .login-form .form-group { margin-bottom: 1.5rem; }
+        .input-with-icon { position: relative; }
+        .input-with-icon i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
+        .input-with-icon input { width: 100%; padding: .875rem 1rem .875rem 3rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; }
+        .input-with-icon input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(67,97,238,.1); }
+        
+        .password-toggle { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; }
+        
+        .form-options { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; }
+        .remember-me { display: flex; align-items: center; gap: .5rem; }
+        .forgot-link { color: var(--primary-color); text-decoration: none; }
+        .forgot-link:hover { text-decoration: underline; }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: .875rem 1.5rem; border-radius: 8px; font-weight: 500; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; gap: .5rem; }
+        .btn-primary { background: var(--primary-color); color: #fff; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-block { width: 100%; }
+        .btn-large { padding: 1rem 1.5rem; font-size: 1.05rem; }
+        .btn-outline { background: transparent; color: var(--primary-color); border-color: var(--border-color); }
+        .btn-outline:hover { border-color: var(--primary-color); background: var(--primary-light); }
+        
+        .divider { display: flex; align-items: center; margin: 1.5rem 0; color: var(--text-secondary); }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+        .divider span { padding: 0 1rem; }
+        
+        .features-side h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .features-list { list-style: none; margin-bottom: 2rem; }
+        .features-list li { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; padding: .75rem; background: rgba(255,255,255,.7); border-radius: 8px; }
+        .features-list i { color: var(--success-color); }
+        
+        .demo-account { background: linear-gradient(135deg, var(--primary-light), #e6eeff); padding: 1.5rem; border-radius: var(--border-radius); margin-top: 2rem; }
+        
+        .auth-page-footer { background: var(--bg-white); padding: 1.5rem 0; text-align: center; border-top: 1px solid var(--border-color); margin-top: auto; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; }
+        .footer-links a:hover { color: var(--primary-color); }
+        
+        .message { position: fixed; top: 20px; right: 20px; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: .75rem; z-index: 10000; animation: slideIn 0.3s ease; color: white; }
+        .message.success { background: var(--success-color); }
+        .message.error { background: var(--error-color); }
+        .message.info { background: var(--primary-color); }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
-
 <body>
-    <!-- Header -->
     <header class="auth-header">
         <div class="container">
             <div class="auth-logo">
-                <a href="index.html">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h1>StudyHub</h1>
-                </a>
+                <a href="index.html"><i class="fas fa-graduation-cap"></i><h1>StudyHub</h1></a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="auth-main">
         <div class="container">
             <div class="auth-container">
-                <!-- Login Form -->
                 <div class="login-box">
                     <div class="login-header">
                         <h1>Welcome Back!</h1>
@@ -549,93 +97,65 @@
 
                     <form class="login-form" id="loginForm">
                         <div class="form-group">
-                            <label for="email">Email Address</label>
+                            <label>Email Address</label>
                             <div class="input-with-icon">
                                 <i class="fas fa-envelope"></i>
                                 <input type="email" id="email" placeholder="student@example.com" required>
                             </div>
-                            <small class="error-text" id="emailError"></small>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label>Password</label>
                             <div class="input-with-icon">
                                 <i class="fas fa-lock"></i>
                                 <input type="password" id="password" placeholder="Enter your password" required>
-                                <button type="button" class="password-toggle" id="togglePassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
+                                <button type="button" class="password-toggle" id="togglePassword"><i class="fas fa-eye"></i></button>
                             </div>
-                            <small class="error-text" id="passwordError"></small>
                         </div>
-
 
                         <div class="form-options">
                             <label class="remember-me">
                                 <input type="checkbox" id="remember">
                                 <span>Remember me</span>
                             </label>
-                            <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block btn-large">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Login to StudyHub
+                            <i class="fas fa-sign-in-alt"></i>Login to StudyHub
                         </button>
 
-                        <div class="divider">
-                            <span>or continue with</span>
-                        </div>
+                        <div class="divider"><span>or continue with</span></div>
 
                         <button type="button" class="btn btn-outline btn-block" id="googleLogin">
-                            <i class="fab fa-google"></i>
-                            Continue with Google
+                            <i class="fab fa-google"></i>Continue with Google
                         </button>
                     </form>
 
-                    <div class="login-footer">
+                    <div class="login-footer" style="margin-top: 1.5rem; text-align: center;">
                         <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
-                        <div class="security-note">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Your data is secure with us</span>
+                        <div class="security-note" style="display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; color: var(--text-secondary);">
+                            <i class="fas fa-shield-alt"></i><span>Your data is secure with us</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Features Side -->
                 <div class="features-side">
                     <h2>Why Login to StudyHub?</h2>
                     <ul class="features-list">
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Access all study materials and notes</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Track your learning progress</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Save notes and bookmarks</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Get personalized recommendations</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Join study groups and discussions</span>
-                        </li>
+                        <li><i class="fas fa-check-circle"></i><span>Access all study materials and notes</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Track your learning progress</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Save notes and bookmarks</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Get personalized recommendations</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Join study groups and discussions</span></li>
                     </ul>
 
                     <div class="demo-account">
                         <h3>Demo Account</h3>
                         <p><strong>Email:</strong> demo@studyhub.in</p>
                         <p><strong>Password:</strong> demo123</p>
-                        <button class="btn btn-outline demo-btn" id="useDemo">
-                            <i class="fas fa-user-circle"></i>
-                            Use Demo Account
+                        <button class="btn btn-outline btn-block" id="useDemo">
+                            <i class="fas fa-user-circle"></i>Use Demo Account
                         </button>
                     </div>
                 </div>
@@ -643,208 +163,153 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="auth-page-footer">
         <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2024 StudyHub. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="contact.html">Contact</a>
-                </div>
+            <p>&copy; 2024 StudyHub. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a>
             </div>
         </div>
     </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const demoLoginBtn = document.getElementById('demoLoginBtn');
+    const BASE_URL = 'https://studyhub-z8gh.onrender.com/api/auth';
     
-    // ✅ CORRECT BACKEND URL
-    const API_BASE_URL = 'https://studyhub-z8gh.onrender.com/api';
-    
-    // Demo account credentials
-    const DEMO_EMAIL = 'demo@studyhub.com';
-    const DEMO_PASSWORD = 'demo123';
-    
-    // Login form submission
-    if(loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await handleLogin(
-                document.getElementById('email').value,
-                document.getElementById('password').value
-            );
-        });
-    }
+    // Password toggle
+    document.getElementById('togglePassword').addEventListener('click', () => {
+        const input = document.getElementById('password');
+        const icon = document.querySelector('#togglePassword i');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.className = 'fas fa-eye-slash';
+        } else {
+            input.type = 'password';
+            icon.className = 'fas fa-eye';
+        }
+    });
     
     // Demo login
-    if(demoLoginBtn) {
-        demoLoginBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            document.getElementById('email').value = DEMO_EMAIL;
-            document.getElementById('password').value = DEMO_PASSWORD;
-            await handleLogin(DEMO_EMAIL, DEMO_PASSWORD);
-        });
-    }
+    document.getElementById('useDemo').addEventListener('click', () => {
+        document.getElementById('email').value = 'demo@studyhub.in';
+        document.getElementById('password').value = 'demo123';
+        document.getElementById('remember').checked = true;
+        
+        setTimeout(() => {
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }, 300);
+    });
     
-    async function handleLogin(email, password) {
-        // Validation
-        if(!email || !password) {
-            alert('Please enter both email and password');
+    // Google Login
+    document.getElementById('googleLogin').addEventListener('click', () => {
+        showMessage('info', 'Google login coming soon! For now, please use email login.');
+    });
+    
+    // Form submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const remember = document.getElementById('remember').checked;
+        
+        if (!email || !password) {
+            showMessage('error', 'Please enter both email and password');
             return;
         }
         
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        const demoBtn = document.getElementById('demoLoginBtn');
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
         
-        // Set loading state
-        if(submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-        }
-        
-        if(demoBtn) {
-            demoBtn.disabled = true;
-            demoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-        }
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
         
         try {
-            console.log('Attempting login with:', email);
-            
-            // Send login request
-            const res = await fetch(`${API_BASE_URL}/auth/login`, {
+            // Try backend login first
+            const res = await fetch(`${BASE_URL}/login`, {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    email, 
-                    password
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
             });
             
-            console.log('Login response status:', res.status);
+            const data = await res.json();
             
-            // Try to parse response
-            let data;
-            try {
-                data = await res.json();
-                console.log('Login response data:', data);
-            } catch (parseError) {
-                console.error('Failed to parse response:', parseError);
-                throw new Error('Invalid response from server');
-            }
-            
-            if(res.ok && data.token) {
-                // ✅ SAVE USER DATA AND TOKEN
+            if (res.ok) {
+                // Save user data
                 localStorage.setItem('studyhub_token', data.token);
-                localStorage.setItem('studyhub_user', JSON.stringify(data.user || data.data));
+                localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+                localStorage.setItem('studyhub_avatar', data.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2));
                 
-                console.log('✅ Login successful, user saved:', data.user);
-                
-                // ✅ SAVE AVATAR INITIALS
-                const user = data.user || data.data;
-                if (user && user.name) {
-                    const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                    localStorage.setItem('studyhub_avatar', initials.substring(0, 2));
+                // Remember me
+                if (remember) {
+                    localStorage.setItem('studyhub_remember', 'true');
+                    localStorage.setItem('studyhub_email', email);
                 }
                 
-                // Show success message
-                alert('✅ Login successful! Redirecting to dashboard...');
+                showMessage('success', 'Login successful! Redirecting...');
                 
-                // ✅ REDIRECT TO DASHBOARD
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
                 }, 1000);
-                
             } else {
-                // Handle login failure
-                let errorMsg = data.message || data.error || 'Login failed';
+                // Try local login as fallback
+                const localUsers = JSON.parse(localStorage.getItem('studyhub_users') || '[]');
+                const localUser = localUsers.find(u => u.email === email && u.password === password);
                 
-                if (data.message && data.message.includes('Invalid credentials') || 
-                    data.message && data.message.includes('incorrect')) {
-                    errorMsg = 'Incorrect email or password';
-                } else if (data.message && data.message.includes('not found')) {
-                    errorMsg = 'No account found with this email';
-                }
-                
-                alert(`❌ ${errorMsg}`);
-                
-                // Reset buttons
-                resetButtons();
-            }
-            
-        } catch(err) {
-            console.error('Login error:', err);
-            
-            // Network or server errors
-            if (err.message.includes('Failed to fetch') || err.message.includes('Network')) {
-                alert('❌ Cannot connect to server. Please check your internet connection.');
-            } else {
-                alert(`❌ ${err.message || 'Server error. Please try again later.'}`);
-            }
-            
-            // Reset buttons
-            resetButtons();
-        }
-    }
-    
-    function resetButtons() {
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        const demoBtn = document.getElementById('demoLoginBtn');
-        
-        if(submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Your Account';
-        }
-        
-        if(demoBtn) {
-            demoBtn.disabled = false;
-            demoBtn.innerHTML = '<i class="fas fa-user"></i> Use Demo Account';
-        }
-    }
-    
-    // Password toggle
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-    
-    if(togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', () => {
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-            const icon = togglePassword.querySelector('i');
-            if (type === 'password') {
-                icon.className = 'fas fa-eye';
-            } else {
-                icon.className = 'fas fa-eye-slash';
-            }
-        });
-    }
-    
-    // Debug: Test backend connection
-    window.addEventListener('load', () => {
-        console.log('Testing backend connection...');
-        fetch(`${API_BASE_URL}/auth/health`)
-            .then(res => {
-                if (res.ok) {
-                    console.log('✅ Backend is reachable');
+                if (localUser) {
+                    const avatar = localUser.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                    
+                    localStorage.setItem('studyhub_token', 'local_token_' + Date.now());
+                    localStorage.setItem('studyhub_user', JSON.stringify(localUser));
+                    localStorage.setItem('studyhub_avatar', avatar);
+                    
+                    showMessage('success', 'Login successful! (Using local data)');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
                 } else {
-                    console.warn('⚠ Backend responded with:', res.status);
+                    showMessage('error', data.message || 'Invalid email or password');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
                 }
-            })
-            .catch(err => {
-                console.warn('❌ Backend not reachable:', err.message);
-                console.log('Make sure backend is running at:', API_BASE_URL);
-            });
+            }
+        } catch (err) {
+            showMessage('error', 'Server error. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
     });
+    
+    // Check if already logged in
+    const token = localStorage.getItem('studyhub_token');
+    const user = localStorage.getItem('studyhub_user');
+    
+    if (token && user) {
+        window.location.href = 'dashboard.html';
+    }
+    
+    // Fill remembered email
+    const remembered = localStorage.getItem('studyhub_remember');
+    const savedEmail = localStorage.getItem('studyhub_email');
+    
+    if (remembered === 'true' && savedEmail) {
+        document.getElementById('email').value = savedEmail;
+        document.getElementById('remember').checked = true;
+    }
+    
+    function showMessage(type, text) {
+        const existing = document.querySelector('.message');
+        if (existing) existing.remove();
+        
+        const message = document.createElement('div');
+        message.className = `message ${type}`;
+        message.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation' : 'info'}-circle"></i><span>${text}</span>`;
+        document.body.appendChild(message);
+        
+        setTimeout(() => message.remove(), 3000);
+    }
 });
 </script>
-
 </body>
 </html>

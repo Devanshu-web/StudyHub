@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | StudyHub</title>
-    <meta name="description"
-        content="Create your free StudyHub account and start learning with organized notes and progress tracking.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -22,25 +19,18 @@
             --primary-light: #eef2ff;
             --secondary-color: #7209b7;
             --success-color: #10b981;
-            --warning-color: #f59e0b;
             --error-color: #ef4444;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            --text-light: #94a3b8;
             --bg-white: #fff;
-            --bg-light: #f8fafc;
             --border-color: #e2e8f0;
             --border-radius: 10px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, var(--primary-light), #f0f4ff);
-            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -53,11 +43,10 @@
             padding: 0 20px;
         }
 
-        /* HEADER */
         .auth-header {
             background: var(--bg-white);
             padding: 1.5rem 0;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .auth-logo a {
@@ -80,7 +69,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* MAIN CONTENT */
         .auth-main {
             flex: 1;
             display: flex;
@@ -93,24 +81,20 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            align-items: start;
             max-width: 1100px;
         }
 
         @media(max-width:768px) {
             .auth-container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
         }
 
-        /* SIGNUP BOX */
         .signup-box {
             background: var(--bg-white);
             padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
         }
 
         .signup-header {
@@ -121,15 +105,8 @@
         .signup-header h1 {
             font-size: 2rem;
             margin-bottom: .5rem;
-            color: var(--text-primary);
         }
 
-        .signup-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* FORM */
         .signup-form .form-group {
             margin-bottom: 1.5rem;
         }
@@ -146,12 +123,6 @@
             }
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: .5rem;
-            font-weight: 500;
-        }
-
         .input-with-icon {
             position: relative;
         }
@@ -161,7 +132,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
+            color: var(--text-secondary);
         }
 
         .input-with-icon input,
@@ -171,7 +142,6 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 1rem;
-            transition: var(--transition);
         }
 
         .input-with-icon input:focus,
@@ -188,24 +158,14 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: var(--text-light);
+            color: var(--text-secondary);
             cursor: pointer;
-            padding: .25rem;
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        .password-strength {
-            margin-top: .5rem;
         }
 
         .strength-meter {
             height: 4px;
             background: var(--border-color);
             border-radius: 2px;
-            overflow: hidden;
             margin-bottom: .5rem;
         }
 
@@ -213,12 +173,7 @@
             height: 100%;
             width: 0%;
             border-radius: 2px;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        .strength-text {
-            font-size: .85rem;
-            color: var(--text-light);
+            transition: width 0.3s ease;
         }
 
         .checkbox {
@@ -226,7 +181,6 @@
             align-items: flex-start;
             gap: .5rem;
             cursor: pointer;
-            font-size: .95rem;
             margin-bottom: .5rem;
         }
 
@@ -234,17 +188,6 @@
             width: 1.1rem;
             height: 1.1rem;
             margin-top: .2rem;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .checkbox a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .checkbox a:hover {
-            text-decoration: underline;
         }
 
         .btn {
@@ -254,24 +197,21 @@
             padding: .875rem 1.5rem;
             border-radius: 8px;
             font-weight: 500;
-            font-size: 1rem;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             gap: .5rem;
         }
 
         .btn-primary {
             background: var(--primary-color);
             color: #fff;
-            border-color: var(--primary-color);
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
-            border-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .btn-block {
@@ -283,7 +223,36 @@
             font-size: 1.05rem;
         }
 
-        /* BENEFITS SIDE */
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border-color: var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
         .benefits-side h2 {
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
@@ -296,18 +265,11 @@
             margin-bottom: 2rem;
         }
 
-        @media(max-width:576px) {
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .benefit-card {
             background: rgba(255, 255, 255, .7);
             padding: 1.25rem;
             border-radius: 8px;
             text-align: center;
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, .3);
         }
 
@@ -319,23 +281,10 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            font-size: 1.5rem;
             color: var(--primary-color);
             background: var(--primary-light);
         }
 
-        .benefit-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: .5rem;
-        }
-
-        .benefit-card p {
-            font-size: .9rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        /* FOOTER */
         .auth-page-footer {
             background: var(--bg-white);
             padding: 1.5rem 0;
@@ -353,457 +302,312 @@
 
         .footer-links a {
             color: var(--text-secondary);
-            font-size: .9rem;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         .footer-links a:hover {
             color: var(--primary-color);
         }
 
-        @media(max-width:576px) {
-            .signup-box {
-                padding: 1.5rem;
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            color: white;
+        }
+
+        .message.success {
+            background: var(--success-color);
+        }
+
+        .message.error {
+            background: var(--error-color);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
             }
 
-            .auth-container {
-                padding: 0 15px;
-            }
-
-            .footer-links {
-                gap: 1rem;
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
     </style>
-    </head>
-    
-    <body>
-        <header class="auth-header">
-            <div class="container">
-                <div class="auth-logo">
-                    <a href="index.html"><i class="fas fa-graduation-cap"></i>
-                        <h1>StudyHub</h1>
-                    </a>
-                </div>
+</head>
+
+<body>
+    <header class="auth-header">
+        <div class="container">
+            <div class="auth-logo">
+                <a href="index.html"><i class="fas fa-graduation-cap"></i>
+                    <h1>StudyHub</h1>
+                </a>
             </div>
-        </header>
-    
-        <main class="auth-main">
-            <div class="container">
-                <div class="auth-container">
-    
-                    <!-- Signup Form -->
-                    <div class="signup-box">
-                        <div class="signup-header">
-                            <h1>Join StudyHub</h1>
-                            <p>Create your free account and start learning smarter</p>
-                        </div>
-    
-                        <form class="signup-form" id="signupForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <div class="input-with-icon"><i class="fas fa-user"></i><input type="text"
-                                            id="firstName" placeholder="John" required></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <div class="input-with-icon"><i class="fas fa-user"></i><input type="text" id="lastName"
-                                            placeholder="Doe" required></div>
-                                </div>
-                            </div>
-    
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <div class="input-with-icon"><i class="fas fa-envelope"></i><input type="email" id="email"
-                                        placeholder="student@example.com" required></div>
-                                <small class="form-small">We'll never share your email with anyone else</small>
-                            </div>
-    
-                            <div class="form-group">
-                                <label for="class">Class/Grade</label>
-                                <div class="input-with-icon"><i class="fas fa-graduation-cap"></i>
-                                    <select id="class" required>
-                                        <option value="">Select your class</option>
-                                        <option value="6">Class 6</option>
-                                        <option value="7" selected>Class 7</option>
-                                        <option value="8">Class 8</option>
-                                        <option value="9">Class 9</option>
-                                        <option value="10">Class 10</option>
-                                    </select>
-                                </div>
-                            </div>
-    
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <div class="input-with-icon"><i class="fas fa-lock"></i>
-                                        <input type="password" id="password" placeholder="Create password" required>
-                                        <button type="button" class="password-toggle" id="togglePassword1"><i
-                                                class="fas fa-eye"></i></button>
-                                    </div>
-                                    <div class="password-strength">
-                                        <div class="strength-meter">
-                                            <div class="strength-bar" id="strengthBar"></div>
-                                        </div>
-                                        <span class="strength-text">Password strength: <span id="strengthText">Very
-                                                Weak</span></span>
-                                    </div>
-                                </div>
-    
-                                <div class="form-group">
-                                    <label for="confirmPassword">Confirm Password</label>
-                                    <div class="input-with-icon"><i class="fas fa-lock"></i>
-                                        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
-                                        <button type="button" class="password-toggle" id="togglePassword2"><i
-                                                class="fas fa-eye"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="form-group">
-                                <label class="checkbox"><input type="checkbox" id="terms" required><span>I agree to the <a
-                                            href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy
-                                            Policy</a></span></label>
-                            </div>
-    
-                            <div class="form-group">
-                                <label class="checkbox"><input type="checkbox" id="newsletter" checked><span>Send me study
-                                        tips and updates</span></label>
-                            </div>
-    
-                            <button type="submit" class="btn btn-primary btn-block btn-large"><i
-                                    class="fas fa-user-plus"></i>Create Free Account</button>
-                        </form>
-    
-                        <div class="signup-footer">
-                            <p>Already have an account? <a href="login.html">Log in here</a></p>
-                        </div>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <div class="container">
+            <div class="auth-container">
+                <div class="signup-box">
+                    <div class="signup-header">
+                        <h1>Join StudyHub</h1>
+                        <p>Create your free account and start learning smarter</p>
                     </div>
-    
-                    <!-- Benefits Side -->
-                    <div class="benefits-side">
-                        <h2>What You Get for Free</h2>
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <div class="benefit-icon"><i class="fas fa-book-open"></i></div>
-                                <h3>Unlimited Notes</h3>
-                                <p>Create and organize unlimited study notes</p>
+
+                    <form class="signup-form" id="signupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <div class="input-with-icon"><i class="fas fa-user"></i><input type="text"
+                                        id="firstName" placeholder="John" required></div>
                             </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
-                                <h3>NCERT Solutions</h3>
-                                <p>Access step-by-step solutions for all chapters</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
-                                <h3>Progress Tracking</h3>
-                                <p>Monitor your improvement with analytics</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
-                                <h3>Mobile Access</h3>
-                                <p>Study anywhere on any device</p>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <div class="input-with-icon"><i class="fas fa-user"></i><input type="text" id="lastName"
+                                        placeholder="Doe" required></div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <div class="input-with-icon"><i class="fas fa-envelope"></i><input type="email" id="email"
+                                    placeholder="student@example.com" required></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Class/Grade</label>
+                            <div class="input-with-icon"><i class="fas fa-graduation-cap"></i>
+                                <select id="class" required>
+                                    <option value="">Select your class</option>
+                                    <option value="6">Class 6</option>
+                                    <option value="7">Class 7</option>
+                                    <option value="8">Class 8</option>
+                                    <option value="9">Class 9</option>
+                                    <option value="10">Class 10</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="input-with-icon"><i class="fas fa-lock"></i>
+                                    <input type="password" id="password" placeholder="Create password" required>
+                                    <button type="button" class="password-toggle" id="togglePassword1"><i
+                                            class="fas fa-eye"></i></button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="strength-meter">
+                                        <div class="strength-bar" id="strengthBar"></div>
+                                    </div>
+                                    <span>Password strength: <span id="strengthText">Very Weak</span></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <div class="input-with-icon"><i class="fas fa-lock"></i>
+                                    <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                                    <button type="button" class="password-toggle" id="togglePassword2"><i
+                                            class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox"><input type="checkbox" id="terms" required><span>I agree to the <a
+                                        href="#">Terms</a> and <a href="#">Privacy Policy</a></span></label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-large"><i
+                                class="fas fa-user-plus"></i>Create Free Account</button>
+
+                        <div class="divider"><span>or continue with</span></div>
+
+                        <button type="button" class="btn btn-outline btn-block" id="googleSignup">
+                            <i class="fab fa-google"></i>Continue with Google
+                        </button>
+                    </form>
+
+                    <div class="login-footer" style="margin-top: 1.5rem; text-align: center;">
+                        <p>Already have an account? <a href="login.html">Log in here</a></p>
                     </div>
-    
                 </div>
-            </div>
-        </main>
-    
-        <footer class="auth-page-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <p>&copy; 2024 StudyHub. All rights reserved.</p>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About</a>
-                        <a href="privacy.html">Privacy Policy</a>
-                        <a href="terms.html">Terms of Service</a>
-                        <a href="contact.html">Contact</a>
+
+                <div class="benefits-side">
+                    <h2>What You Get for Free</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-book-open"></i></div>
+                            <h3>Unlimited Notes</h3>
+                            <p>Create and organize unlimited study notes</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <h3>NCERT Solutions</h3>
+                            <p>Access step-by-step solutions</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Progress Tracking</h3>
+                            <p>Monitor your improvement</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h3>Mobile Access</h3>
+                            <p>Study anywhere on any device</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-    
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('signupForm');
-    
-    // ✅ CORRECT BACKEND URL - Updated
-    const BASE_URL = 'https://studyhub-z8gh.onrender.com/api/auth';
-    
-    // DOM Elements
-    const passwordInput = document.getElementById('password');
-    const strengthBar = document.getElementById('strengthBar');
-    const strengthText = document.getElementById('strengthText');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const togglePassword1 = document.getElementById('togglePassword1');
-    const togglePassword2 = document.getElementById('togglePassword2');
+        </div>
+    </main>
 
-    // Password strength indicator
-    function checkPasswordStrength(password) {
-        let strength = 0;
-        if (password.length >= 8) strength++;
-        if (/[A-Z]/.test(password)) strength++;
-        if (/[a-z]/.test(password)) strength++;
-        if (/[0-9]/.test(password)) strength++;
-        if (/[^A-Za-z0-9]/.test(password)) strength++;
+    <footer class="auth-page-footer">
+        <div class="container">
+            <p>&copy; 2024 StudyHub. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a
+                    href="terms.html">Terms</a><a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
 
-        let width = '0%';
-        let color = '#ef4444';
-        let text = 'Very Weak';
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const BASE_URL = 'https://studyhub-z8gh.onrender.com/api/auth';
 
-        switch(strength) {
-            case 1:
-                width = '20%';
-                color = '#ef4444';
-                text = 'Weak';
-                break;
-            case 2:
-                width = '40%';
-                color = '#f59e0b';
-                text = 'Fair';
-                break;
-            case 3:
-                width = '60%';
-                color = '#10b981';
-                text = 'Good';
-                break;
-            case 4:
-                width = '80%';
-                color = '#10b981';
-                text = 'Strong';
-                break;
-            case 5:
-                width = '100%';
-                color = '#10b981';
-                text = 'Very Strong';
-                break;
-        }
+            // Password strength
+            const passwordInput = document.getElementById('password');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
 
-        strengthBar.style.width = width;
-        strengthBar.style.backgroundColor = color;
-        strengthText.textContent = text;
-        strengthText.style.color = color;
-    }
+            passwordInput.addEventListener('input', (e) => {
+                const password = e.target.value;
+                let strength = 0;
+                if (password.length >= 8) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
 
-    // Password strength real-time check
-    if(passwordInput) {
-        passwordInput.addEventListener('input', (e) => {
-            checkPasswordStrength(e.target.value);
-            
-            // Check password match
-            if(confirmPasswordInput.value) {
-                if(e.target.value !== confirmPasswordInput.value) {
-                    confirmPasswordInput.style.borderColor = 'var(--error-color)';
-                } else {
-                    confirmPasswordInput.style.borderColor = 'var(--success-color)';
+                const colors = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+                const texts = ['Very Weak', 'Weak', 'Good', 'Strong'];
+                strengthBar.style.width = (strength * 25) + '%';
+                strengthBar.style.backgroundColor = colors[strength] || '#ef4444';
+                strengthText.textContent = texts[strength] || 'Very Weak';
+                strengthText.style.color = colors[strength] || '#ef4444';
+            });
+
+            // Password toggles
+            document.getElementById('togglePassword1').addEventListener('click', () => {
+                const input = document.getElementById('password');
+                input.type = input.type === 'password' ? 'text' : 'password';
+            });
+
+            document.getElementById('togglePassword2').addEventListener('click', () => {
+                const input = document.getElementById('confirmPassword');
+                input.type = input.type === 'password' ? 'text' : 'password';
+            });
+
+            // Google Signup
+            document.getElementById('googleSignup').addEventListener('click', () => {
+                showMessage('info', 'Google signup coming soon! For now, please use email signup.');
+            });
+
+            // Form submission
+            document.getElementById('signupForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const studentClass = document.getElementById('class').value;
+                const terms = document.getElementById('terms').checked;
+
+                if (!terms) {
+                    showMessage('error', 'You must agree to the Terms and Privacy Policy');
+                    return;
                 }
-            }
-        });
-    }
 
-    // Confirm password validation
-    if(confirmPasswordInput) {
-        confirmPasswordInput.addEventListener('input', (e) => {
-            if(passwordInput.value !== e.target.value) {
-                confirmPasswordInput.style.borderColor = 'var(--error-color)';
-            } else {
-                confirmPasswordInput.style.borderColor = 'var(--success-color)';
-            }
-        });
-    }
+                if (password !== confirmPassword) {
+                    showMessage('error', 'Passwords do not match');
+                    return;
+                }
 
-    // Password toggle functionality
-    if(togglePassword1) {
-        togglePassword1.addEventListener('click', () => {
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-            const icon = togglePassword1.querySelector('i');
-            if (type === 'password') {
-                icon.className = 'fas fa-eye';
-            } else {
-                icon.className = 'fas fa-eye-slash';
-            }
-        });
-    }
+                if (password.length < 6) {
+                    showMessage('error', 'Password must be at least 6 characters');
+                    return;
+                }
 
-    if(togglePassword2) {
-        togglePassword2.addEventListener('click', () => {
-            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
-            confirmPasswordInput.type = type;
-            const icon = togglePassword2.querySelector('i');
-            if (type === 'password') {
-                icon.className = 'fas fa-eye';
-            } else {
-                icon.className = 'fas fa-eye-slash';
-            }
-        });
-    }
+                const name = `${firstName} ${lastName}`;
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
 
-    // Form submission
-    if(signupForm) {
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
 
-            // Get form values
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const studentClass = document.getElementById('class').value;
-            const terms = document.getElementById('terms').checked;
-
-            // Validation
-            let isValid = true;
-            let errorMessage = '';
-            
-            if(!firstName || firstName.length < 2) {
-                errorMessage = 'Please enter a valid first name (min 2 characters)';
-                isValid = false;
-            } else if(!lastName || lastName.length < 1) {
-                errorMessage = 'Please enter a valid last name';
-                isValid = false;
-            } else if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                errorMessage = 'Please enter a valid email address';
-                isValid = false;
-            } else if(!password || password.length < 6) {
-                errorMessage = 'Password must be at least 6 characters';
-                isValid = false;
-            } else if(password !== confirmPassword) {
-                errorMessage = 'Passwords do not match';
-                isValid = false;
-            } else if(!studentClass) {
-                errorMessage = 'Please select your class';
-                isValid = false;
-            } else if(!terms) {
-                errorMessage = 'You must agree to the Terms of Service';
-                isValid = false;
-            }
-
-            if(!isValid) {
-                alert(errorMessage);
-                return;
-            }
-
-            const name = `${firstName} ${lastName}`;
-            const submitBtn = signupForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            // Set loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-
-            try {
-                console.log('Attempting signup with:', { name, email, class: studentClass });
-                
-                // Send signup request
-                const res = await fetch(`${BASE_URL}/signup`, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name, 
-                        email, 
-                        password, 
-                        class: studentClass
-                    })
-                });
-
-                console.log('Signup response status:', res.status);
-                
-                // Try to parse response
-                let data;
                 try {
-                    data = await res.json();
-                    console.log('Signup response data:', data);
-                } catch (parseError) {
-                    console.error('Failed to parse response:', parseError);
-                    throw new Error('Invalid response from server');
-                }
+                    const res = await fetch(`${BASE_URL}/signup`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, password, class: studentClass })
+                    });
 
-                if(res.ok) {
-                    // ✅ SAVE USER DATA AND TOKEN (IMPORTANT)
-                    if (data.token && data.user) {
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        // Save user data
                         localStorage.setItem('studyhub_token', data.token);
                         localStorage.setItem('studyhub_user', JSON.stringify(data.user));
-                        
-                        alert('✅ Account created successfully! You are now logged in. Redirecting to dashboard...');
-                        
-                        // Save newsletter preference
-                        const newsletter = document.getElementById('newsletter').checked;
-                        if(newsletter) {
-                            localStorage.setItem('studyhub_newsletter', 'true');
-                        }
-                        
-                        // ✅ REDIRECT TO DASHBOARD (NOT LOGIN)
+                        localStorage.setItem('studyhub_avatar', data.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2));
+
+                        // Save locally for backup
+                        const allUsers = JSON.parse(localStorage.getItem('studyhub_users') || '[]');
+                        allUsers.push({ id: data.user.id, name, email, password, class: studentClass });
+                        localStorage.setItem('studyhub_users', JSON.stringify(allUsers));
+
+                        showMessage('success', 'Account created successfully! Redirecting...');
+
                         setTimeout(() => {
                             window.location.href = 'dashboard.html';
                         }, 1500);
                     } else {
-                        // If backend doesn't return token, redirect to login
-                        alert('✅ Account created! Please login with your credentials.');
-                        setTimeout(() => {
-                            window.location.href = 'login.html';
-                        }, 1500);
+                        showMessage('error', data.message || 'Signup failed');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
                     }
-                } else {
-                    // Handle specific error messages
-                    let errorMsg = data.message || data.error || 'Signup failed';
-                    
-                    // Common error messages
-                    if (data.message && data.message.includes('already exists')) {
-                        errorMsg = 'This email is already registered. Please try logging in.';
-                    } else if (data.message && data.message.includes('validation')) {
-                        errorMsg = 'Please check your information and try again.';
-                    }
-                    
-                    alert(`❌ ${errorMsg}`);
+                } catch (err) {
+                    showMessage('error', 'Server error. Please try again.');
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
                 }
+            });
 
-            } catch(err) {
-                console.error('Signup error:', err);
-                
-                // Network or server errors
-                if (err.message.includes('Failed to fetch') || err.message.includes('Network')) {
-                    alert('❌ Cannot connect to server. Please check your internet connection and try again.');
-                } else {
-                    alert(`❌ ${err.message || 'Server error. Please try again later.'}`);
-                }
-                
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
+            function showMessage(type, text) {
+                const existing = document.querySelector('.message');
+                if (existing) existing.remove();
+
+                const message = document.createElement('div');
+                message.className = `message ${type}`;
+                message.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i><span>${text}</span>`;
+                document.body.appendChild(message);
+
+                setTimeout(() => message.remove(), 3000);
             }
         });
-    }
-
-    // Debug: Test backend connection
-    window.addEventListener('load', () => {
-        console.log('Testing backend connection...');
-        fetch(`${BASE_URL}/health`)
-            .then(res => {
-                if (res.ok) {
-                    console.log('✅ Backend is reachable');
-                } else {
-                    console.warn('⚠ Backend responded with:', res.status);
-                }
-            })
-            .catch(err => {
-                console.warn('❌ Backend not reachable:', err.message);
-                console.log('Note: Make sure CORS is enabled on the backend');
-            });
-    });
-});
-</script>
-
-    </body>
+    </script>
+</body>
 
 </html>
