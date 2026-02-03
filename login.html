@@ -660,266 +660,191 @@
     </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const togglePasswordBtn = document.getElementById('togglePassword');
-    const demoBtn = document.getElementById('useDemo');
-    const googleLoginBtn = document.getElementById('googleLogin');
-    const rememberCheckbox = document.getElementById('remember');
-
-    // ✅ CORRECT BACKEND URL - Render par hai
-    const API_BASE_URL = 'https://studyhub-z8gh.onrender.com/api';;
-
-    // Toggle password visibility
-    togglePasswordBtn.addEventListener('click', function () {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        this.querySelector('i').classList.toggle('fa-eye');
-        this.querySelector('i').classList.toggle('fa-eye-slash');
-    });
-
-    // Load remembered email
-    const rememberedEmail = localStorage.getItem('studyhub_remembered_email');
-    if (rememberedEmail) {
-        emailInput.value = rememberedEmail;
-        rememberCheckbox.checked = true;
+    const demoLoginBtn = document.getElementById('demoLoginBtn');
+    
+    // ✅ CORRECT BACKEND URL
+    const API_BASE_URL = 'https://studyhub-z8gh.onrender.com/api';
+    
+    // Demo account credentials
+    const DEMO_EMAIL = 'demo@studyhub.com';
+    const DEMO_PASSWORD = 'demo123';
+    
+    // Login form submission
+    if(loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await handleLogin(
+                document.getElementById('email').value,
+                document.getElementById('password').value
+            );
+        });
     }
-
-    // Form submit
-    loginForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-
-        // Basic validation
-        if (!validateEmail(email)) {
-            showMessage('Please enter a valid email', 'error');
+    
+    // Demo login
+    if(demoLoginBtn) {
+        demoLoginBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            document.getElementById('email').value = DEMO_EMAIL;
+            document.getElementById('password').value = DEMO_PASSWORD;
+            await handleLogin(DEMO_EMAIL, DEMO_PASSWORD);
+        });
+    }
+    
+    async function handleLogin(email, password) {
+        // Validation
+        if(!email || !password) {
+            alert('Please enter both email and password');
             return;
         }
-
-        if (password.length < 6) {
-            showMessage('Password must be at least 6 characters', 'error');
-            return;
-        }
-
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-        submitBtn.disabled = true;
-
-        try {
-            // Save remember me preference
-            if (rememberCheckbox.checked) {
-                localStorage.setItem('studyhub_remembered_email', email);
-            } else {
-                localStorage.removeItem('studyhub_remembered_email');
-            }
-
-            // Call backend login
-            const res = await fetch(`${API_URL}/login`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                // Save token
-                localStorage.setItem('studyhub_token', data.token || data.access_token);
-                localStorage.setItem('studyhub_user', JSON.stringify(data.user || data.data));
-
-                showMessage('Login successful! Redirecting...', 'success');
-
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            } else {
-                showMessage(data.message || data.error || 'Login failed', 'error');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-
-        } catch (err) {
-            console.error(err);
-            showMessage('Server connection failed. Please try again.', 'error');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }
-    });
-
-    // ✅ DEMO ACCOUNT AUTO-LOGIN - WORKING VERSION
-    demoBtn.addEventListener('click', async function () {
-        // Button loading state
-        demoBtn.disabled = true;
-        const originalHTML = demoBtn.innerHTML;
-        demoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
         
-        showMessage('Logging in as Demo...', 'info');
-
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const demoBtn = document.getElementById('demoLoginBtn');
+        
+        // Set loading state
+        if(submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        }
+        
+        if(demoBtn) {
+            demoBtn.disabled = true;
+            demoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        }
+        
         try {
-            // Try demo credentials first
-            const demoData = {
-                email: 'demo@studyhub.in',
-                password: 'demo123'
-            };
-
-            console.log('Attempting demo login...');
-            const res = await fetch(`${API_URL}/login`, {
+            console.log('Attempting login with:', email);
+            
+            // Send login request
+            const res = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(demoData)
+                body: JSON.stringify({
+                    email, 
+                    password
+                })
             });
-
-            console.log('Demo response status:', res.status);
             
-            if (res.ok) {
-                const data = await res.json();
-                
-                // Save data
-                localStorage.setItem('studyhub_token', data.token || data.access_token);
+            console.log('Login response status:', res.status);
+            
+            // Try to parse response
+            let data;
+            try {
+                data = await res.json();
+                console.log('Login response data:', data);
+            } catch (parseError) {
+                console.error('Failed to parse response:', parseError);
+                throw new Error('Invalid response from server');
+            }
+            
+            if(res.ok && data.token) {
+                // ✅ SAVE USER DATA AND TOKEN
+                localStorage.setItem('studyhub_token', data.token);
                 localStorage.setItem('studyhub_user', JSON.stringify(data.user || data.data));
-                localStorage.setItem('is_demo_user', 'true');
-
-                showMessage('Demo login successful! Redirecting...', 'success');
-
+                
+                console.log('✅ Login successful, user saved:', data.user);
+                
+                // ✅ SAVE AVATAR INITIALS
+                const user = data.user || data.data;
+                if (user && user.name) {
+                    const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                    localStorage.setItem('studyhub_avatar', initials.substring(0, 2));
+                }
+                
+                // Show success message
+                alert('✅ Login successful! Redirecting to dashboard...');
+                
+                // ✅ REDIRECT TO DASHBOARD
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
                 }, 1000);
-            } else {
-                // If demo credentials don't work, check if there's a demo-login endpoint
-                console.log('Trying demo-login endpoint...');
                 
-                try {
-                    const demoRes = await fetch(`${API_URL}/demo-login`, {
-                        method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    if (demoRes.ok) {
-                        const demoData = await demoRes.json();
-                        
-                        localStorage.setItem('studyhub_token', demoData.token);
-                        localStorage.setItem('studyhub_user', JSON.stringify(demoData.user));
-                        localStorage.setItem('is_demo_user', 'true');
-
-                        showMessage('Demo login successful! Redirecting...', 'success');
-
-                        setTimeout(() => {
-                            window.location.href = 'dashboard.html';
-                        }, 1000);
-                    } else {
-                        throw new Error('Demo endpoints not available');
-                    }
-                } catch (demoErr) {
-                    throw new Error('Demo login failed');
+            } else {
+                // Handle login failure
+                let errorMsg = data.message || data.error || 'Login failed';
+                
+                if (data.message && data.message.includes('Invalid credentials') || 
+                    data.message && data.message.includes('incorrect')) {
+                    errorMsg = 'Incorrect email or password';
+                } else if (data.message && data.message.includes('not found')) {
+                    errorMsg = 'No account found with this email';
                 }
+                
+                alert(`❌ ${errorMsg}`);
+                
+                // Reset buttons
+                resetButtons();
             }
-
-        } catch (err) {
-            console.error('Demo login error:', err);
             
-            // ✅ FALLBACK: Create offline demo user
-            showMessage('Creating offline demo session...', 'info');
+        } catch(err) {
+            console.error('Login error:', err);
             
-            const mockUser = {
-                _id: 'demo_user_' + Date.now(),
-                name: 'Demo Student',
-                email: 'demo@studyhub.in',
-                class: '10',
-                avatar: 'DS',
-                isDemo: true,
-                createdAt: new Date().toISOString()
-            };
+            // Network or server errors
+            if (err.message.includes('Failed to fetch') || err.message.includes('Network')) {
+                alert('❌ Cannot connect to server. Please check your internet connection.');
+            } else {
+                alert(`❌ ${err.message || 'Server error. Please try again later.'}`);
+            }
             
-            const mockToken = 'demo_token_' + Math.random().toString(36).substring(2, 15);
-            
-            localStorage.setItem('studyhub_token', mockToken);
-            localStorage.setItem('studyhub_user', JSON.stringify(mockUser));
-            localStorage.setItem('is_demo_user', 'true');
-            
-            setTimeout(() => {
-                showMessage('Offline demo created! Redirecting...', 'success');
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            }, 500);
-            
-        } finally {
-            // Reset button after 3 seconds even if redirecting
-            setTimeout(() => {
-                demoBtn.disabled = false;
-                demoBtn.innerHTML = originalHTML;
-            }, 3000);
+            // Reset buttons
+            resetButtons();
         }
-    });
-
-    // Google login placeholder
-    if (googleLoginBtn) {
-        googleLoginBtn.addEventListener('click', function () {
-            showMessage('Google login will be available soon!', 'info');
+    }
+    
+    function resetButtons() {
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const demoBtn = document.getElementById('demoLoginBtn');
+        
+        if(submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Your Account';
+        }
+        
+        if(demoBtn) {
+            demoBtn.disabled = false;
+            demoBtn.innerHTML = '<i class="fas fa-user"></i> Use Demo Account';
+        }
+    }
+    
+    // Password toggle
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    
+    if(togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            const icon = togglePassword.querySelector('i');
+            if (type === 'password') {
+                icon.className = 'fas fa-eye';
+            } else {
+                icon.className = 'fas fa-eye-slash';
+            }
         });
     }
-
-    // Helpers
-    function validateEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-
-    function showMessage(text, type) {
-        // Remove existing messages
-        const existingMsg = document.querySelector('.message');
-        if (existingMsg) existingMsg.remove();
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
-        messageDiv.innerHTML = `<i class="fas fa-${getMessageIcon(type)}"></i><span>${text}</span>`;
-        document.body.appendChild(messageDiv);
-
-        setTimeout(() => {
-            messageDiv.style.animation = 'slideOut 0.3s ease forwards';
-            setTimeout(() => {
-                if (messageDiv.parentNode) {
-                    messageDiv.remove();
+    
+    // Debug: Test backend connection
+    window.addEventListener('load', () => {
+        console.log('Testing backend connection...');
+        fetch(`${API_BASE_URL}/auth/health`)
+            .then(res => {
+                if (res.ok) {
+                    console.log('✅ Backend is reachable');
+                } else {
+                    console.warn('⚠ Backend responded with:', res.status);
                 }
-            }, 300);
-        }, 4000);
-    }
-
-    function getMessageIcon(type) {
-        switch (type) {
-            case 'success': return 'check-circle';
-            case 'error': return 'exclamation-circle';
-            default: return 'info-circle';
-        }
-    }
+            })
+            .catch(err => {
+                console.warn('❌ Backend not reachable:', err.message);
+                console.log('Make sure backend is running at:', API_BASE_URL);
+            });
+    });
 });
-// After saving token in login.html
-localStorage.setItem('studyhub_token', data.token);
-localStorage.setItem('studyhub_user', JSON.stringify(data.user));
-
-// Also save avatar initials
-const user = data.user || data.data?.user;
-if (user && user.name) {
-    const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-    localStorage.setItem('studyhub_avatar', initials.substring(0, 2));
-}
-
-// Redirect to dashboard
-window.location.href = 'dashboard.html';
 </script>
+
 </body>
 </html>
