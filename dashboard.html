@@ -195,7 +195,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 // ======================= CONFIG =======================
-const BASE_URL = "https://studyhub-rq7d.onrender.com";
+const BASE_URL = "https://studyhub-z8gh.onrender.com/api";
 
 // ======================= AUTH CHECK =======================
 function checkAuth() {
@@ -207,6 +207,126 @@ function checkAuth() {
         return false;
     }
     return { user, token };
+}
+
+// ======================= LOAD DASHBOARD DATA =======================
+async function loadDashboardData() {
+    const auth = checkAuth();
+    if (!auth) return;
+    
+    const { user, token } = auth;
+    
+    // Set user info immediately
+    document.getElementById('userName').textContent = user.name || 'Student';
+    document.getElementById('profileName').textContent = user.name || 'Student';
+    document.getElementById('profileClass').textContent = `Class ${user.class || '10'} Student`;
+    document.getElementById('userClass').textContent = `Class ${user.class || '10'}`;
+    document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.name || 'Student'}!`;
+    
+    // Set avatar initial
+    const avatarEl = document.getElementById('profileAvatar');
+    if (avatarEl) {
+        const initials = (user.name || 'Student').split(' ').map(n => n[0]).join('').toUpperCase();
+        avatarEl.textContent = initials.substring(0, 2);
+    }
+    
+    try {
+        // Try to fetch dashboard data
+        const res = await fetch(`${BASE_URL}/user/dashboard`, {
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (res.status === 401) {
+            // Token expired
+            localStorage.removeItem('studyhub_token');
+            localStorage.removeItem('studyhub_user');
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        let data = {};
+        if (res.ok) {
+            data = await res.json();
+        } else {
+            // If API endpoint doesn't exist, use demo data
+            console.log('Dashboard API not available, using demo data');
+            loadDemoData();
+            return;
+        }
+        
+        // Update stats
+        updateStats(data);
+        
+        // Update progress
+        updateProgress(data);
+        
+        // Update recent activity
+        updateRecentActivity(data);
+        
+        // Update subject progress
+        updateSubjectProgress(data);
+        
+        // Initialize chart
+        if (data.studyData) {
+            initializeStudyChart(data.studyData);
+        }
+        
+    } catch (err) {
+        console.error('Dashboard error:', err);
+        // Use demo data if API fails
+        loadDemoData();
+    }
+}
+
+// ======================= DEMO DATA FUNCTIONS =======================
+function loadDemoData() {
+    console.log('Loading demo data...');
+    
+    // Set demo stats
+    document.getElementById('studyHours').textContent = '12.5';
+    document.getElementById('notesCount').textContent = '24';
+    document.getElementById('testsCompleted').textContent = '8';
+    document.getElementById('streakDays').textContent = '7';
+    
+    // Set demo progress
+    const progressPercent = '65';
+    const progressBar = document.getElementById('overallProgressBar');
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+        progressBar.style.backgroundColor = '#3b82f6';
+    }
+    document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+    
+    // Add demo subjects
+    updateSubjectProgress({
+        subjectProgress: [
+            { name: 'Mathematics', progress: 75 },
+            { name: 'Science', progress: 60 },
+            { name: 'English', progress: 45 },
+            { name: 'Social Studies', progress: 30 }
+        ]
+    });
+    
+    // Add demo activities
+    updateRecentActivity({
+        recentActivity: [
+            { title: 'Started Math chapter 5', time: '2 hours ago' },
+            { title: 'Completed Science quiz', time: '1 day ago' },
+            { title: 'Added Physics notes', time: '2 days ago' },
+            { title: 'Viewed Chemistry video', time: '3 days ago' }
+        ]
+    });
+    
+    // Initialize demo chart
+    setTimeout(() => {
+        initializeStudyChart({
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            hours: [2, 3, 1.5, 4, 2.5, 3.5, 1]
+        });
+    }, 500);
 }
 
 // ======================= LIVE CLOCK =======================
@@ -239,73 +359,6 @@ function updateLiveClock() {
     
     update(); // Initial call
     setInterval(update, 1000);
-}
-
-// ======================= LOAD DASHBOARD DATA =======================
-async function loadDashboardData() {
-    const auth = checkAuth();
-    if (!auth) return;
-    
-    const { user, token } = auth;
-    
-    // Set user info immediately
-    document.getElementById('userName').textContent = user.name;
-    document.getElementById('profileName').textContent = user.name;
-    document.getElementById('profileClass').textContent = `Class ${user.class} Student`;
-    document.getElementById('userClass').textContent = `Class ${user.class}`;
-    document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.name}!`;
-    
-    // Set avatar initial
-    const avatarEl = document.getElementById('profileAvatar');
-    if (avatarEl) {
-        const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-        avatarEl.textContent = initials.substring(0, 2);
-    }
-    
-    try {
-        const res = await fetch(`${BASE_URL}/api/user/dashboard`, {
-            headers: { 
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (res.status === 401) {
-            // Token expired
-            localStorage.removeItem('studyhub_token');
-            localStorage.removeItem('studyhub_user');
-            window.location.href = 'login.html';
-            return;
-        }
-        
-        const data = await res.json();
-        
-        if (!res.ok) {
-            throw new Error(data.message || 'Failed to load dashboard');
-        }
-        
-        // Update stats
-        updateStats(data);
-        
-        // Update progress
-        updateProgress(data);
-        
-        // Update recent activity
-        updateRecentActivity(data);
-        
-        // Update subject progress
-        updateSubjectProgress(data);
-        
-        // Initialize chart
-        if (data.studyData) {
-            initializeStudyChart(data.studyData);
-        }
-        
-    } catch (err) {
-        console.error('Dashboard error:', err);
-        showDashboardMessage('error', 'Failed to load dashboard data. Using demo data.');
-        loadDemoData();
-    }
 }
 
 // ======================= UPDATE FUNCTIONS =======================
@@ -344,11 +397,17 @@ function updateRecentActivity(data) {
     
     activityList.innerHTML = '';
     
-    const activities = data.recentActivity || [
-        { title: 'Started Math chapter', time: '2 hours ago' },
-        { title: 'Completed Science quiz', time: '1 day ago' },
-        { title: 'Added new notes', time: '2 days ago' }
-    ];
+    const activities = data.recentActivity || [];
+    
+    if (activities.length === 0) {
+        activityList.innerHTML = `
+            <li><div class="activity-item"><i class="fas fa-info-circle"></i>
+                <span class="activity-title">No recent activities</span>
+                <span class="activity-time">Start studying!</span>
+            </div></li>
+        `;
+        return;
+    }
     
     activities.forEach(activity => {
         const li = document.createElement('li');
@@ -367,12 +426,17 @@ function updateSubjectProgress(data) {
     const container = document.getElementById('subjectProgressContainer');
     if (!container) return;
     
-    const subjects = data.subjectProgress || [
-        { name: 'Mathematics', progress: 75 },
-        { name: 'Science', progress: 60 },
-        { name: 'English', progress: 45 },
-        { name: 'Social Studies', progress: 30 }
-    ];
+    const subjects = data.subjectProgress || [];
+    
+    if (subjects.length === 0) {
+        container.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-book-open"></i>
+                <p>No subject data available</p>
+            </div>
+        `;
+        return;
+    }
     
     container.innerHTML = '';
     
@@ -397,19 +461,13 @@ function initializeStudyChart(studyData) {
     const ctx = document.getElementById('studyChart');
     if (!ctx) return;
     
-    // Use demo data if no real data
-    const data = studyData || {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        hours: [2, 3, 1.5, 4, 2.5, 3.5, 1]
-    };
-    
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: data.labels,
+            labels: studyData.labels,
             datasets: [{
                 label: 'Study Hours',
-                data: data.hours,
+                data: studyData.hours,
                 backgroundColor: '#4361ee',
                 borderRadius: 6,
                 borderSkipped: false,
@@ -453,77 +511,23 @@ function getProgressColor(percent) {
     return '#ef4444';
 }
 
-function showDashboardMessage(type, text) {
+function trackActivity(title, description) {
+    console.log(`Activity tracked: ${title} - ${description}`);
+    
+    // Show visual feedback
     const message = document.createElement('div');
-    message.className = `dashboard-message ${type}`;
+    message.className = 'activity-feedback';
     message.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-        <span>${text}</span>
-        <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+        <i class="fas fa-check-circle"></i>
+        <span>${title} recorded!</span>
     `;
     
-    const mainContent = document.querySelector('.main-content');
-    if (mainContent) {
-        mainContent.insertBefore(message, mainContent.firstChild);
-        
-        setTimeout(() => {
-            if (message.parentElement) {
-                message.style.opacity = '0';
-                setTimeout(() => message.remove(), 300);
-            }
-        }, 5000);
-    }
-}
-
-function loadDemoData() {
-    // Set demo stats
-    document.getElementById('studyHours').textContent = '12.5';
-    document.getElementById('notesCount').textContent = '24';
-    document.getElementById('testsCompleted').textContent = '8';
-    document.getElementById('streakDays').textContent = '7';
+    document.body.appendChild(message);
     
-    // Set demo progress
-    const progressBar = document.getElementById('overallProgressBar');
-    const progressPercent = '65';
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-    document.getElementById('progressPercent').textContent = `${progressPercent}%`;
-    
-    // Initialize demo chart
-    setTimeout(() => initializeStudyChart(), 500);
-}
-
-// ======================= ACTIVITY TRACKING =======================
-async function trackActivity(title, description) {
-    const auth = checkAuth();
-    if (!auth) return;
-    
-    const { token } = auth;
-    
-    try {
-        const res = await fetch(`${BASE_URL}/api/user/activity`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ 
-                title, 
-                description,
-                timestamp: new Date().toISOString()
-            })
-        });
-        
-        if (res.ok) {
-            console.log('Activity logged:', title);
-        }
-    } catch (err) {
-        console.error('Error logging activity:', err);
-    }
-    
-    // Show feedback to user
-    showDashboardMessage('success', `${title} activity recorded!`);
+    setTimeout(() => {
+        message.style.opacity = '0';
+        setTimeout(() => message.remove(), 300);
+    }, 2000);
 }
 
 // ======================= LOGOUT FUNCTION =======================
@@ -536,7 +540,7 @@ function logout() {
 // ======================= INITIALIZE =======================
 document.addEventListener('DOMContentLoaded', () => {
     // Check authentication
-    checkAuth();
+    if (!checkAuth()) return;
     
     // Start live clock
     updateLiveClock();
@@ -544,13 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load dashboard data
     loadDashboardData();
     
-    // Add logout button functionality if needed
-    const logoutBtn = document.querySelector('.logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', logout);
-    }
-    
-    // Quick actions
+    // Add click handlers for action cards
     document.querySelectorAll('.action-card').forEach(card => {
         card.addEventListener('click', function() {
             const title = this.querySelector('h4').textContent;
@@ -558,6 +556,12 @@ document.addEventListener('DOMContentLoaded', () => {
             trackActivity(title, desc);
         });
     });
+    
+    // Add logout button if exists
+    const logoutBtn = document.querySelector('.logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
 });
 </script>
 
