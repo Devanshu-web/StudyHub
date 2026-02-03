@@ -528,17 +528,22 @@
             </div>
         </footer>
     
-  <script>
+ <script>
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
-    const BASE_URL = 'https://studyhub-rq7d.onrender.com/api/auth';
     
-    // Password strength indicator
+    // ✅ CORRECT BACKEND URL - Updated
+    const BASE_URL = 'https://studyhub-z8gh.onrender.com/api/auth';
+    
+    // DOM Elements
     const passwordInput = document.getElementById('password');
     const strengthBar = document.getElementById('strengthBar');
     const strengthText = document.getElementById('strengthText');
     const confirmPasswordInput = document.getElementById('confirmPassword');
+    const togglePassword1 = document.getElementById('togglePassword1');
+    const togglePassword2 = document.getElementById('togglePassword2');
 
+    // Password strength indicator
     function checkPasswordStrength(password) {
         let strength = 0;
         if (password.length >= 8) strength++;
@@ -612,11 +617,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Password toggle functionality
+    if(togglePassword1) {
+        togglePassword1.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            const icon = togglePassword1.querySelector('i');
+            if (type === 'password') {
+                icon.className = 'fas fa-eye';
+            } else {
+                icon.className = 'fas fa-eye-slash';
+            }
+        });
+    }
+
+    if(togglePassword2) {
+        togglePassword2.addEventListener('click', () => {
+            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+            confirmPasswordInput.type = type;
+            const icon = togglePassword2.querySelector('i');
+            if (type === 'password') {
+                icon.className = 'fas fa-eye';
+            } else {
+                icon.className = 'fas fa-eye-slash';
+            }
+        });
+    }
+
     // Form submission
     if(signupForm) {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Get form values
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -627,56 +660,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Validation
             let isValid = true;
+            let errorMessage = '';
             
             if(!firstName || firstName.length < 2) {
-                alert('Please enter a valid first name (min 2 characters)');
+                errorMessage = 'Please enter a valid first name (min 2 characters)';
                 isValid = false;
-            }
-            
-            if(!lastName || lastName.length < 1) {
-                alert('Please enter a valid last name');
+            } else if(!lastName || lastName.length < 1) {
+                errorMessage = 'Please enter a valid last name';
                 isValid = false;
-            }
-            
-            if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('Please enter a valid email address');
+            } else if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errorMessage = 'Please enter a valid email address';
                 isValid = false;
-            }
-            
-            if(!password || password.length < 6) {
-                alert('Password must be at least 6 characters');
+            } else if(!password || password.length < 6) {
+                errorMessage = 'Password must be at least 6 characters';
                 isValid = false;
-            }
-            
-            if(password !== confirmPassword) {
-                alert('Passwords do not match');
+            } else if(password !== confirmPassword) {
+                errorMessage = 'Passwords do not match';
                 isValid = false;
-            }
-            
-            if(!studentClass) {
-                alert('Please select your class');
+            } else if(!studentClass) {
+                errorMessage = 'Please select your class';
                 isValid = false;
-            }
-            
-            if(!terms) {
-                alert('You must agree to the Terms of Service');
+            } else if(!terms) {
+                errorMessage = 'You must agree to the Terms of Service';
                 isValid = false;
             }
 
-            if(!isValid) return;
+            if(!isValid) {
+                alert(errorMessage);
+                return;
+            }
 
             const name = `${firstName} ${lastName}`;
             const submitBtn = signupForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             
+            // Set loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
 
             try {
+                console.log('Attempting signup with:', { name, email, class: studentClass });
+                
+                // Send signup request
                 const res = await fetch(`${BASE_URL}/signup`, {
                     method: 'POST',
                     headers: { 
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
                         name, 
@@ -686,10 +716,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                 });
 
-                const data = await res.json();
+                console.log('Signup response status:', res.status);
+                
+                // Try to parse response
+                let data;
+                try {
+                    data = await res.json();
+                    console.log('Signup response data:', data);
+                } catch (parseError) {
+                    console.error('Failed to parse response:', parseError);
+                    throw new Error('Invalid response from server');
+                }
 
                 if(res.ok) {
-                    alert('Account created successfully! Redirecting to login...');
+                    alert('✅ Account created successfully! Redirecting to login...');
                     
                     // Save newsletter preference
                     const newsletter = document.getElementById('newsletter').checked;
@@ -697,49 +737,60 @@ document.addEventListener('DOMContentLoaded', () => {
                         localStorage.setItem('studyhub_newsletter', 'true');
                     }
                     
+                    // Redirect to login page
                     setTimeout(() => {
                         window.location.href = 'login.html';
-                    }, 1000);
+                    }, 1500);
                 } else {
-                    alert(data.message || 'Signup failed. Please try again.');
+                    // Handle specific error messages
+                    let errorMsg = data.message || data.error || 'Signup failed';
+                    
+                    // Common error messages
+                    if (data.message && data.message.includes('already exists')) {
+                        errorMsg = 'This email is already registered. Please try logging in.';
+                    } else if (data.message && data.message.includes('validation')) {
+                        errorMsg = 'Please check your information and try again.';
+                    }
+                    
+                    alert(`❌ ${errorMsg}`);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
                 }
 
             } catch(err) {
                 console.error('Signup error:', err);
-                alert('Server error. Please try again later.');
-            } finally {
+                
+                // Network or server errors
+                if (err.message.includes('Failed to fetch') || err.message.includes('Network')) {
+                    alert('❌ Cannot connect to server. Please check your internet connection and try again.');
+                } else {
+                    alert(`❌ ${err.message || 'Server error. Please try again later.'}`);
+                }
+                
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
         });
     }
 
-    // Password toggles
-    const togglePassword1 = document.getElementById('togglePassword1');
-    const togglePassword2 = document.getElementById('togglePassword2');
-
-    if(togglePassword1) {
-        togglePassword1.addEventListener('click', () => {
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-            togglePassword1.innerHTML = type === 'password' 
-                ? '<i class="fas fa-eye"></i>' 
-                : '<i class="fas fa-eye-slash"></i>';
-        });
-    }
-
-    if(togglePassword2) {
-        togglePassword2.addEventListener('click', () => {
-            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
-            confirmPasswordInput.type = type;
-            togglePassword2.innerHTML = type === 'password' 
-                ? '<i class="fas fa-eye"></i>' 
-                : '<i class="fas fa-eye-slash"></i>';
-        });
-    }
+    // Debug: Test backend connection
+    window.addEventListener('load', () => {
+        console.log('Testing backend connection...');
+        fetch(`${BASE_URL}/health`)
+            .then(res => {
+                if (res.ok) {
+                    console.log('✅ Backend is reachable');
+                } else {
+                    console.warn('⚠ Backend responded with:', res.status);
+                }
+            })
+            .catch(err => {
+                console.warn('❌ Backend not reachable:', err.message);
+                console.log('Note: Make sure CORS is enabled on the backend');
+            });
+    });
 });
 </script>
-
 
     </body>
 
