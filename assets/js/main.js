@@ -80,7 +80,7 @@ function checkPasswordStrength(password) {
 
 // API request helper
 async function apiRequest(endpoint, method = 'GET', data = null) {
-    const API_BASE_URL = 'http://localhost:5000/api';
+    const API_BASE_URL = 'https://studyhub-z8gh.onrender.com/api';
     const url = `${API_BASE_URL}${endpoint}`;
     
     const options = {
